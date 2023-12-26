@@ -1,6 +1,7 @@
 #include <mlx.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct	s_data
 {
@@ -14,6 +15,7 @@ typedef struct	s_data
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	void	*img;
 }	t_vars;
 
 int	abs(int num)
@@ -86,7 +88,11 @@ void	desenhar_linha(t_data *img, int x0, int y0, int x1, int y1, int cor)
 
 int	close(int keycode, t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	if (keycode == 97)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_loop_end(vars->mlx);
+	}
 	return (0);
 }
 
@@ -98,49 +104,22 @@ int	main(void)
 	t_vars	vars;
 
 	mlx = mlx_init();
-	window = mlx_new_window(mlx, 300, 300, "Hello world!");
-	img.img = mlx_new_image(mlx, 300, 300);
+	window = mlx_new_window(mlx, 800, 800, "Hello world!");
+	img.img = mlx_new_image(mlx, 800, 800);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	desenhar_linha(&img, 5, 3, 24, 13, 0x00FFFFFF);
-	desenhar_linha(&img, 24, 13, 5, 26, 0x00FFFFFF);
-	desenhar_linha(&img, 5, 26, 5, 3, 0x00FFFFFF);
-	desenhar_linha(&img, 6, 5, 23, 13, 0x00FFFF00);
-	desenhar_linha(&img, 23, 13, 6, 13, 0x0000FF00);
-	// desenhar_linha(&img, 7, 26, 5, 3, 0x00FFFFFF);
+	for (int i = 0; i < 6; i++)
+	{
+		desenhar_linha(&img, 5 + i, 3 + i * 2, 24 - i, 13, 0x00FF00FF);
+		desenhar_linha(&img, 24 - i, 13, 5 + i, 23 - i * 2, 0x00FFFF00);
+		desenhar_linha(&img, 5 + i, 23 - i * 2, 5 + i, 3 + i * 2, 0x0000FFFF);
+	}
 	mlx_put_image_to_window(mlx, window, img.img, 0, 0);
 	vars.mlx = mlx;
 	vars.win = window;
+	vars.img = &img;
 	mlx_hook(window, 2, 1L<<0, close, &vars);
 	mlx_loop(vars.mlx);
 
 	return (EXIT_SUCCESS);
 }
-
-// def faz_linha(x0, y0, x1, y1):
-//
-//   data = np.zeros((10, 10))
-//
-//   dx = abs(x1 - x0)
-//   sx = 1 if x0 < x1 else -1
-//   dy = -abs(y1 - y0)
-//   sy = 1 if y0 < y1 else -1
-//   error = dx + dy
-//
-//   while True:
-//     data[y0][x0] = 0.5
-//     if x0 == x1 and y0 == y1:
-//       break
-//     e2 = 2 * error
-//     if e2 >= dy:
-//         if x0 == x1:
-//           break
-//         error = error + dy
-//         x0 = x0 + sx
-//     if e2 <= dx:
-//         if y0 == y1:
-//           break
-//         error = error + dx
-//         y0 = y0 + sy
-//
-//   return data
