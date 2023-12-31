@@ -10,7 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 //
-// #include "fdf.h"
+#include "fdf.h"
 //
 // typedef struct s_rgb
 // {
@@ -123,3 +123,121 @@
 // #undef fpart_
 // #undef round_
 // #undef rfpart_
+
+// swaps two numbers
+void swap(int* a , int*b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+// returns absolute value of number
+float absolute(float x )
+{
+	if (x < 0) return -x;
+	else return x;
+}
+
+//returns integer part of a floating point number
+int iPartOfNumber(float x)
+{
+	return (int)x;
+}
+
+//rounds off a number
+int roundNumber(float x)
+{
+	return iPartOfNumber(x + 0.5) ;
+}
+
+//returns fractional part of a number
+float fPartOfNumber(float x)
+{
+	if (x>0) return x - iPartOfNumber(x);
+	else return x - (iPartOfNumber(x)+1);
+
+}
+
+//returns 1 - fractional part of number
+float rfPartOfNumber(float x)
+{
+	return 1 - fPartOfNumber(x);
+}
+
+uint32_t set_brightness(uint32_t color, float brightness)
+{
+	int	brightness_rgba;
+
+	brightness_rgba = brightness * 255;
+	return ((color & 0xFFFFFF00) | brightness_rgba);
+}
+
+void	draw_line(void *img, t_point *point_0, t_point *point_1)
+{
+// 	t_bres	aux;
+//
+// 	aux.dx = point_1->x - point_0->x;
+// 	aux.dy = point_1->y - point_0->y;
+// 	aux.abs_dx = abs(aux.dx);
+// 	aux.abs_dy = abs(aux.dy);
+// 	if (aux.abs_dx > aux.abs_dy)
+// 		slope_lower_1(&aux, point_0, map);
+// 	else
+// 		slope_bigger_equal_1(&aux, point_0, map);
+	int steep = absolute(point_1->y - point_0->y) > absolute(point_1->x - point_0->x);
+
+	// swap the co-ordinates if slope > 1 or we
+	// draw backwards
+	if (steep)
+	{
+		swap(&point_0->x , &point_0->y);
+		swap(&point_1->x , &point_1->y);
+	}
+	if (point_0->x > point_1->x)
+	{
+		swap(&point_0->x ,&point_1->x);
+		swap(&point_0->y ,&point_1->y);
+	}
+
+	//compute the slope
+	float dx = point_1->x-point_0->x;
+	float dy = point_1->y-point_0->y;
+	float gradient = dy/dx;
+	if (dx == 0.0)
+		gradient = 1;
+
+	int xpxl1 = point_0->x;
+	int xpxl2 = point_1->x;
+	float intersectY = point_0->y;
+
+	// main loop
+	if (steep)
+	{
+		int x;
+		for (x = xpxl1 ; x <=xpxl2 ; x++)
+		{
+			// pixel coverage is determined by fractional
+			// part of y co-ordinate
+			print_big_pixel(img, iPartOfNumber(intersectY), x,
+						set_brightness(point_0->color, rfPartOfNumber(intersectY)));
+			print_big_pixel(img, iPartOfNumber(intersectY) - 1, x,
+						set_brightness(point_0->color, fPartOfNumber(intersectY)));
+			intersectY += gradient;
+		}
+	}
+	else
+	{
+		int x;
+		for (x = xpxl1 ; x <=xpxl2 ; x++)
+		{
+			// pixel coverage is determined by fractional
+			// part of y co-ordinate
+			print_big_pixel(img, x, iPartOfNumber(intersectY),
+						set_brightness(point_0->color, rfPartOfNumber(intersectY)));
+			print_big_pixel(img, x, iPartOfNumber(intersectY) - 1,
+						set_brightness(point_0->color, fPartOfNumber(intersectY)));
+			intersectY += gradient;
+		}
+	}
+}

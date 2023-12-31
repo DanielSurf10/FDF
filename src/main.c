@@ -42,13 +42,14 @@ int	ternary(int condition, int if_true, int if_false)
 // 	*(unsigned int*)dst = color;
 // }
 
-void	print_big_pixel(void *img, int x, int y, int color)
+void	print_big_pixel(void *img, int x, int y, uint32_t color)
 {
 	x *= 10;
 	y *= 10;
 	for (int i = x; i < x + 10; i++)
 		for (int j = y; j < y + 10; j++)
 			mlx_put_pixel(img, i, j, color);
+	// printf("%i %i %i %i\n", (color >> 24) & 0xFF, (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF);
 }
 //
 void	desenhar_linha(void *img, int x0, int y0, int x1, int y1, int cor)
@@ -88,44 +89,6 @@ void	desenhar_linha(void *img, int x0, int y0, int x1, int y1, int cor)
 	}
 }
 
-// int	close(int keycode, t_vars *vars)
-// {
-// 	if (keycode == 97)
-// 	{
-// 		mlx_destroy_window(vars->mlx, vars->win);
-// 		mlx_loop_end(vars->mlx);
-// 	}
-// 	return (0);
-// }
-//
-// int	main(void)
-// {
-// 	void	*mlx;
-// 	void	*window;
-// 	t_data	img;
-// 	t_vars	vars;
-//
-// 	mlx = mlx_init();
-// 	window = mlx_new_window(mlx, 800, 800, "Hello world!");
-// 	img.img = mlx_new_image(mlx, 800, 800);
-// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-// 								&img.endian);
-// 	for (int i = 0; i < 6; i++)
-// 	{
-// 		desenhar_linha(&img, 5 + i, 3 + i * 2, 24 - i, 13, 0x00FF00FF);
-// 		desenhar_linha(&img, 24 - i, 13, 5 + i, 23 - i * 2, 0x00FFFF00);
-// 		desenhar_linha(&img, 5 + i, 23 - i * 2, 5 + i, 3 + i * 2, 0x0000FFFF);
-// 	}
-// 	mlx_put_image_to_window(mlx, window, img.img, 0, 0);
-// 	vars.mlx = mlx;
-// 	vars.win = window;
-// 	vars.img = &img;
-// 	mlx_hook(window, 2, 1L<<0, close, &vars);
-// 	mlx_loop(vars.mlx);
-//
-// 	return (EXIT_SUCCESS);
-// }
-
 // Exit the program as failure.
 static void ft_error(void)
 {
@@ -155,26 +118,46 @@ int	main(void)
 	/* Do stuff */
 
 	// Create and display the image.
+	mlx_image_t* fundo = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!fundo || (mlx_image_to_window(mlx, fundo, 0, 0) < 0))
+		ft_error();
+	mlx_set_instance_depth(fundo->instances, 0);
+	// memset(fundo->pixels, 0x000000AF, fundo->width * fundo->height * sizeof(int32_t));
+
 	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
+	mlx_set_instance_depth(img->instances, 1);
 
-	memset(img->pixels, 0xAF, img->width * img->height * sizeof(int32_t));
+	// memset(img->pixels, 0xAF0000FF, img->width * img->height * sizeof(int32_t));
 
 	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 10, 10, 0xFF0000FF);
+	// mlx_put_pixel(img, 10, 10, 0xFF0000FF);
 
-	for (int i = 0; i < 6; i++)
-	{
-		desenhar_linha(img, 5 + i, 3 + i * 2, 24 - i, 13, 0x00FF00FF);
-		desenhar_linha(img, 24 - i, 13, 5 + i, 23 - i * 2, 0x00FFFF00);
-		desenhar_linha(img, 5 + i, 23 - i * 2, 5 + i, 3 + i * 2, 0x0000FFFF);
-	}
+	// for (int i = 0; i < 6; i++)
+	// {
+	// 	desenhar_linha(img, 5 + i, 3 + i * 2, 24 - i, 13, 0x00FF00FF);
+	// 	desenhar_linha(img, 24 - i, 13, 5 + i, 23 - i * 2, 0x00FFFF00);
+	// 	desenhar_linha(img, 5 + i, 23 - i * 2, 5 + i, 3 + i * 2, 0x0000FFFF);
+	// }
+
+	t_point point_1 = {10, 10, 0x55B4CFFF};
+	t_point point_2 = {30, 24, 0x55B4CFFF};
+
+	draw_line(img, &point_1, &point_2);
+	desenhar_linha(img, point_1.x, point_1.y + 10, point_2.x, point_2.y + 10, point_1.color);
+
+	// mlx_texture_t* texture = mlx_load_png("icon-3.png");	// Para colocar o ícone
+	// mlx_set_icon(mlx, texture);
+	// mlx_image_t* imagem = mlx_texture_to_image(mlx, texture);
+	// mlx_image_to_window(mlx, imagem, 0, 0);
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
+	mlx_delete_image(mlx, img);
+	mlx_delete_image(mlx, fundo);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
