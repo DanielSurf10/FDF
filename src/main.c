@@ -122,7 +122,8 @@ int	main(void)
 	if (!fundo || (mlx_image_to_window(mlx, fundo, 0, 0) < 0))
 		ft_error();
 	mlx_set_instance_depth(fundo->instances, 0);
-	// memset(fundo->pixels, 0x000000AF, fundo->width * fundo->height * sizeof(int32_t));
+	// memset(fundo->pixels, 0xAF, fundo->width * fundo->height * sizeof(int32_t));
+	memset(fundo->pixels, 0xAF, fundo->width * fundo->height * sizeof(int32_t));
 
 	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
