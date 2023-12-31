@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3_init_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:00 by cogata            #+#    #+#             */
-/*   Updated: 2023/11/20 11:39:01 by cogata           ###   ########.fr       */
+/*   Updated: 2023/12/31 14:50:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ t_map	*init_map(char *map_name)
 	map = initialize_matrix(map_name, width, height);
 	map->width = width;
 	map->height = height;
+	map->line_render = 0;
 	return (map);
 }

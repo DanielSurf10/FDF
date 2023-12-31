@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:56 by cogata            #+#    #+#             */
-/*   Updated: 2023/12/30 14:30:01 by danbarbo         ###   ########.fr       */
+/*   Updated: 2023/12/31 14:56:50 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	ft_hook(void *param)
 	t_map	*map;
 
 	map = param;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_F10))
+		map->line_render = map->line_render == 0 ? 1 : 0;
 	translate_zoom_close(map);
 	rotate(map);
 	projection(map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:54:03 by cogata            #+#    #+#             */
-/*   Updated: 2023/11/16 14:54:05 by cogata           ###   ########.fr       */
+/*   Updated: 2023/12/31 14:51:59 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_map
 	t_position	position;
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_image;
+	int			line_render;
 }				t_map;
 
 typedef struct s_coordinate

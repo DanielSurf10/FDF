@@ -141,17 +141,19 @@ uint32_t set_brightness(uint32_t color, float brightness)
 
 void	bresenham(t_coordinate *point_0, t_coordinate *point_1, t_map *map)
 {
-// 	t_bres	aux;
-//
-// 	aux.dx = point_1->x - point_0->x;
-// 	aux.dy = point_1->y - point_0->y;
-// 	aux.abs_dx = abs(aux.dx);
-// 	aux.abs_dy = abs(aux.dy);
-// 	if (aux.abs_dx > aux.abs_dy)
-// 		slope_lower_1(&aux, point_0, map);
-// 	else
-// 		slope_bigger_equal_1(&aux, point_0, map);
+	if (map->line_render == 0)
+	{
+		t_bres	aux;
 
+		aux.dx = point_1->x - point_0->x;
+		aux.dy = point_1->y - point_0->y;
+		aux.abs_dx = abs(aux.dx);
+		aux.abs_dy = abs(aux.dy);
+		if (aux.abs_dx > aux.abs_dy)
+			slope_lower_1(&aux, point_0, map);
+		else
+			slope_bigger_equal_1(&aux, point_0, map);
+	}
 // 	int steep = absolute(point_1->y - point_0->y) > absolute(point_1->x - point_0->x);
 //
 // 	// swap the co-ordinates if slope > 1 or we
@@ -207,72 +209,74 @@ void	bresenham(t_coordinate *point_0, t_coordinate *point_1, t_map *map)
 // 			intersectY += gradient;
 // 		}
 // 	}
+	else
+	{
+		int		x1 = point_0->x;
+		int		x2 = point_1->x;
+		int		y1 = point_0->y;
+		int		y2 = point_1->y;
+		int32_t	color = point_0->color;
 
-	int		x1 = point_0->x;
-	int		x2 = point_1->x;
-	int		y1 = point_0->y;
-	int		y2 = point_1->y;
-	int32_t	color = point_0->color;
+		double dx = (double)x2 - (double)x1;
+		double dy = (double)y2 - (double)y1;
+		if ( absolute(dx) > absolute(dy) ) {
+			if ( x2 < x1 ) {
+				swap_(x1, x2);
+				swap_(y1, y2);
+			}
+			double gradient = dy / dx;
+			double xend = round_(x1);
+			double yend = y1 + gradient*(xend - x1);
+			double xgap = rfpart_(x1 + 0.5);
+			int xpxl1 = xend;
+			int ypxl1 = ipart_(yend);
+			put_valid_pixel(map, xpxl1, ypxl1, set_brightness(color, rfpart_(yend)*xgap));
+			put_valid_pixel(map, xpxl1, ypxl1+1, set_brightness(color, fpart_(yend)*xgap));
+			double intery = yend + gradient;
 
-	double dx = (double)x2 - (double)x1;
-	double dy = (double)y2 - (double)y1;
-	if ( absolute(dx) > absolute(dy) ) {
-		if ( x2 < x1 ) {
-			swap_(x1, x2);
-			swap_(y1, y2);
-		}
-		double gradient = dy / dx;
-		double xend = round_(x1);
-		double yend = y1 + gradient*(xend - x1);
-		double xgap = rfpart_(x1 + 0.5);
-		int xpxl1 = xend;
-		int ypxl1 = ipart_(yend);
-		put_valid_pixel(map, xpxl1, ypxl1, set_brightness(color, rfpart_(yend)*xgap));
-		put_valid_pixel(map, xpxl1, ypxl1+1, set_brightness(color, fpart_(yend)*xgap));
-		double intery = yend + gradient;
+			xend = round_(x2);
+			yend = y2 + gradient*(xend - x2);
+			xgap = fpart_(x2+0.5);
+			int xpxl2 = xend;
+			int ypxl2 = ipart_(yend);
+			put_valid_pixel(map, xpxl2, ypxl2, set_brightness(color, rfpart_(yend) * xgap));
+			put_valid_pixel(map, xpxl2, ypxl2 + 1, set_brightness(color, fpart_(yend) * xgap));
 
-		xend = round_(x2);
-		yend = y2 + gradient*(xend - x2);
-		xgap = fpart_(x2+0.5);
-		int xpxl2 = xend;
-		int ypxl2 = ipart_(yend);
-		put_valid_pixel(map, xpxl2, ypxl2, set_brightness(color, rfpart_(yend) * xgap));
-		put_valid_pixel(map, xpxl2, ypxl2 + 1, set_brightness(color, fpart_(yend) * xgap));
+			int x;
+			for(x=xpxl1+1; x < xpxl2; x++) {
+				put_valid_pixel(map, x, ipart_(intery), set_brightness(color, rfpart_(intery)));
+				put_valid_pixel(map, x, ipart_(intery) + 1, set_brightness(color, fpart_(intery)));
+				intery += gradient;
+			}
+		} else {
+			if ( y2 < y1 ) {
+				swap_(x1, x2);
+				swap_(y1, y2);
+			}
+			double gradient = dx / dy;
+			double yend = round_(y1);
+			double xend = x1 + gradient*(yend - y1);
+			double ygap = rfpart_(y1 + 0.5);
+			int ypxl1 = yend;
+			int xpxl1 = ipart_(xend);
+			put_valid_pixel(map, xpxl1, ypxl1, set_brightness(color, rfpart_(xend)*ygap));
+			put_valid_pixel(map, xpxl1 + 1, ypxl1, set_brightness(color, fpart_(xend)*ygap));
+			double interx = xend + gradient;
 
-		int x;
-		for(x=xpxl1+1; x < xpxl2; x++) {
-			put_valid_pixel(map, x, ipart_(intery), set_brightness(color, rfpart_(intery)));
-			put_valid_pixel(map, x, ipart_(intery) + 1, set_brightness(color, fpart_(intery)));
-			intery += gradient;
-		}
-	} else {
-		if ( y2 < y1 ) {
-			swap_(x1, x2);
-			swap_(y1, y2);
-		}
-		double gradient = dx / dy;
-		double yend = round_(y1);
-		double xend = x1 + gradient*(yend - y1);
-		double ygap = rfpart_(y1 + 0.5);
-		int ypxl1 = yend;
-		int xpxl1 = ipart_(xend);
-		put_valid_pixel(map, xpxl1, ypxl1, set_brightness(color, rfpart_(xend)*ygap));
-		put_valid_pixel(map, xpxl1 + 1, ypxl1, set_brightness(color, fpart_(xend)*ygap));
-		double interx = xend + gradient;
+			yend = round_(y2);
+			xend = x2 + gradient*(yend - y2);
+			ygap = fpart_(y2+0.5);
+			int ypxl2 = yend;
+			int xpxl2 = ipart_(xend);
+			put_valid_pixel(map, xpxl2, ypxl2, set_brightness(color, rfpart_(xend) * ygap));
+			put_valid_pixel(map, xpxl2 + 1, ypxl2, set_brightness(color, fpart_(xend) * ygap));
 
-		yend = round_(y2);
-		xend = x2 + gradient*(yend - y2);
-		ygap = fpart_(y2+0.5);
-		int ypxl2 = yend;
-		int xpxl2 = ipart_(xend);
-		put_valid_pixel(map, xpxl2, ypxl2, set_brightness(color, rfpart_(xend) * ygap));
-		put_valid_pixel(map, xpxl2 + 1, ypxl2, set_brightness(color, fpart_(xend) * ygap));
-
-		int y;
-		for(y=ypxl1+1; y < ypxl2; y++) {
-			put_valid_pixel(map, ipart_(interx), y, set_brightness(color, rfpart_(interx)));
-			put_valid_pixel(map, ipart_(interx) + 1, y, set_brightness(color, fpart_(interx)));
-			interx += gradient;
+			int y;
+			for(y=ypxl1+1; y < ypxl2; y++) {
+				put_valid_pixel(map, ipart_(interx), y, set_brightness(color, rfpart_(interx)));
+				put_valid_pixel(map, ipart_(interx) + 1, y, set_brightness(color, fpart_(interx)));
+				interx += gradient;
+			}
 		}
 	}
 }
