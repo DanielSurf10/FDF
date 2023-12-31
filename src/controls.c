@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpoveda- <me@izenynn.com>                  +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 17:59:18 by dpoveda-          #+#    #+#             */
-/*   Updated: 2021/10/26 17:59:20 by dpoveda-         ###   ########.fr       */
+/*   Updated: 2023/12/31 14:43:48 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	handle_flattening(int keycode, t_vars *vars)
 	}
 	if (keycode == KEY_MINUS)
 	{
-		if (vars->flat > 0)
+		if (vars->flat >= 0)
 			vars->flat -= 0.1;
 	}
 }
