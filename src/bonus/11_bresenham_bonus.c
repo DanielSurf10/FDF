@@ -141,7 +141,7 @@ uint32_t set_brightness(uint32_t color, float brightness)
 
 void	bresenham(t_coordinate *point_0, t_coordinate *point_1, t_map *map)
 {
-	if (map->line_render == 0)
+	if ((map->line_render & 1) == 0)
 	{
 		t_bres	aux;
 
