@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:56 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/01 19:00:24 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/01 20:38:15 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_hook(void *param)
 	t_map	*map;
 
 	map = param;
-	printf("%d %d - ", (map->line_render & 2) >> 1, map->line_render & 1);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_F10) && (map->line_render & 2) == 0)
 		map->line_render = map->line_render == 0 ? 1 : 0;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_F10))

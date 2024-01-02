@@ -6,15 +6,15 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:54:03 by cogata            #+#    #+#             */
-/*   Updated: 2023/12/31 14:51:55 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/01 23:38:27 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
 
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # ifndef M_PI
 #  define M_PI 3.14159

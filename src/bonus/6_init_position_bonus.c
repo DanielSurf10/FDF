@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   6_init_position_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:16 by cogata            #+#    #+#             */
-/*   Updated: 2023/11/20 11:39:17 by cogata           ###   ########.fr       */
+/*   Updated: 2024/01/01 23:43:19 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	find_initial_scale(t_map *map)
 	float	w_scale;
 	float	h_scale;
 
-	map->position.scale = 1;
+	// map->position.scale = 1;
 	w_scale = (float)WIDTH / map->width;
 	h_scale = (float)HEIGHT / map->height;
 	map->position.scale = h_scale;
 	if (h_scale > w_scale)
 		map->position.scale = w_scale;
-	map->position.scale *= 0.8;
+	map->position.scale *= 0.6;
 }
 
 void	centralize(t_map *map)
