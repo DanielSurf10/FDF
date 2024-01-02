@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/24 12:31:38 by dpoveda-          #+#    #+#             */
-/*   Updated: 2023/12/31 14:42:25 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/01 18:05:58 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ uint32_t set_brightness(uint32_t color, float brightness)
 
 	brightness_rgba = brightness * 255;
 	// printf("%d\n", brightness_rgba);
-	return ((color & 0xFFFFFF00) | brightness_rgba);
+	return ((color << 8) | brightness_rgba);
 }
 
 t_point	new_point_aux(int x, int y)
