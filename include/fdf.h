@@ -6,17 +6,20 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2023/12/30 22:57:28 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/01 19:13:28 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <stdlib.h>
+// PARA TIRAR DPS
 # include <stdio.h>
-# include <unistd.h>
 # include <string.h>
+
+
+# include <stdlib.h>
+# include <unistd.h>
 # include <stdint.h>
 # include "MLX42.h"
 
@@ -29,6 +32,12 @@ typedef struct s_point
 	int			y;
 	uint32_t	color;
 }	t_point;
+
+typedef struct s_keys
+{
+	int	key_p : 1;		// Botão de mudar a perspectiva
+	int	key_line : 1;	// Botão para mudar o algoritmo de fazer a linha
+} t_keys;
 
 void	draw_line(void *img, t_point *point_0, t_point *point_1);
 void	print_big_pixel(void *img, int x, int y, uint32_t color);
