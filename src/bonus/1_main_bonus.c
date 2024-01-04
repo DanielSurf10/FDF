@@ -6,11 +6,20 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:38:49 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/01 20:36:15 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/03 23:13:45 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf_bonus.h"
+
+void	close_window(mlx_key_data_t keydata, void* param)
+{
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(param);
+
+	// if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
+	// 	mlx_close_window(map->mlx);
+}
 
 int32_t	main(int32_t argc, char *argv[])
 {
@@ -34,6 +43,7 @@ int32_t	main(int32_t argc, char *argv[])
 	randomize(map);
 	if (init_window(mlx, mlx_image) == -1)
 		free_and_message(map, "ERROR: mlx window init failed.");
+	mlx_key_hook(mlx, close_window, mlx);
 	mlx_loop_hook(mlx, ft_hook, map);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

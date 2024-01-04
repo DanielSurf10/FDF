@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:56 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/01 20:38:15 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 00:14:47 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	increase_descrease_z(t_map *map)
 
 void	translate_zoom_close(t_map *map)
 {
-	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(map->mlx);
+	// if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
+	// 	mlx_close_window(map->mlx);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_UP))
 		map->position.y_offset -= 5;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
@@ -69,21 +69,37 @@ void	translate_zoom_close(t_map *map)
 
 void	ft_hook(void *param)
 {
+	double	start;
+	double	count_time;
 	t_map	*map;
 
 	map = param;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_F10) && (map->line_render & 2) == 0)
-		map->line_render = map->line_render == 0 ? 1 : 0;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_F10))
-		map->line_render = map->line_render | 2;
-	else
-		map->line_render = map->line_render & 1;
-	translate_zoom_close(map);
-	rotate(map);
-	projection(map);
-	increase_descrease_z(map);
-	mlx_delete_image(map->mlx, map->mlx_image);
-	map->mlx_image = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(map->mlx, map->mlx_image, 0, 0);
-	randomize(map);
+	map->time += map->mlx->delta_time;
+	if (map->time >= ((1000.0 / 40) / 1000.0))
+	{
+		if (map->frame == 2)
+		{
+			map->position.y_angle -= 1;
+			map->position.z_angle -= 1;
+			map->frame = 0;
+		}
+		if (mlx_is_key_down(map->mlx, MLX_KEY_F10) && (map->line_render & 2) == 0)
+			map->line_render = map->line_render == 0 ? 1 : 0;
+		if (mlx_is_key_down(map->mlx, MLX_KEY_F10))
+			map->line_render = map->line_render | 2;
+		else
+			map->line_render = map->line_render & 1;
+		translate_zoom_close(map);
+		rotate(map);
+		projection(map);
+		increase_descrease_z(map);
+		mlx_delete_image(map->mlx, map->mlx_image);
+		map->mlx_image = mlx_new_image(map->mlx, WIDTH, HEIGHT);
+		mlx_image_to_window(map->mlx, map->mlx_image, 0, 0);
+		randomize(map);
+		map->frame += 1;
+		map->time = 0;
+	}
+	// printf("%f\n", map->mlx->delta_time);
+
 }

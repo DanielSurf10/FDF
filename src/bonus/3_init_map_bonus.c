@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:00 by cogata            #+#    #+#             */
-/*   Updated: 2023/12/31 14:50:03 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/03 23:18:19 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ t_map	*init_map(char *map_name)
 	map->width = width;
 	map->height = height;
 	map->line_render = 0;
+	map->time = 0;
+	map->frame = 0;
 	return (map);
 }

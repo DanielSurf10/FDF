@@ -6,15 +6,15 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:54:03 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/01 23:38:27 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/03 23:17:53 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1280
+# define HEIGHT 720
 
 # ifndef M_PI
 #  define M_PI 3.14159
@@ -55,6 +55,8 @@ typedef struct s_map
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_image;
 	int			line_render;
+	double		time;
+	int			frame;
 }				t_map;
 
 typedef struct s_coordinate
