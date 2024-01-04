@@ -55,7 +55,24 @@ Ideias:
 		para cima é o que já tá no mapa
 		para baixo é esse mesmo valor só que negativo
 
+	Aperta algum botão para começar a girar um eixo
+		Aperta o mesmo botão para girar do outro lado o mesmo eixo
+		Aperta a 3ª vez para parar de girar
+
+		Após ter apertado esse botão, o eixo não vira mais com os botões de girar o eixo em modo manual até desligar o modo automático
+			Ex:
+				Se apertou "i" para girar o eixo z, os botões que giram o eixo z não funcionaram até o automático parar de girar
+
+		Na visão de fases pode precisar aumentar o delay dos frames para girar
+
 	Projeções
 		Isométrica
 		Top view
 		Perspectiva
+			Essas 3 os botões de girar funcionarão em modo contínuo
+				Se segurar o botão ele continua girando e só para quando parar de apertar
+
+		Visões de faces em 4 imagens
+			Nesse modo, os botões de girar funcionarão em modo único
+				Apertou uma vez só pode girar de novo se apertar de novo
+				Segorou o botão não acontece nada além de girar uma vez só na borda de descida
