@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_init_map_utils.c                                 :+:      :+:    :+:   */
+/*   4_init_map_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:57:23 by cogata            #+#    #+#             */
-/*   Updated: 2023/11/16 13:57:24 by cogata           ###   ########.fr       */
+/*   Created: 2023/11/20 11:39:05 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf.h"
+#include "fdf.h"
 
 void	find_width(char *map_name, uint32_t *width)
 {

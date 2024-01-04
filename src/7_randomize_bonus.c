@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   6_randomize.c                                      :+:      :+:    :+:   */
+/*   7_randomize_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:57:40 by cogata            #+#    #+#             */
-/*   Updated: 2023/11/16 13:57:42 by cogata           ###   ########.fr       */
+/*   Created: 2023/11/20 11:39:21 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf.h"
+#include "fdf.h"
 
 void	transform(t_coordinate *point_1, t_coordinate *point_2, t_map *map)
 {
 	scale(point_1, point_2, map);
+	if (map->position.projection == '1')
+		isometric(map);
+	else if (map->position.projection == '2')
+		oblique(point_1, point_2);
 	rotation_in_z(point_1, point_2, map);
 	rotation_in_x(point_1, point_2, map);
 	rotation_in_y(point_1, point_2, map);

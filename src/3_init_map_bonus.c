@@ -6,11 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:00 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/03 23:18:19 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:22:30 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf_bonus.h"
+#include "fdf.h"
 
 void	init_each_line(int fd, uint32_t h, uint32_t width, t_map *map)
 {

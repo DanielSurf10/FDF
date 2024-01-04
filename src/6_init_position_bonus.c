@@ -6,11 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:16 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/01 23:43:19 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf_bonus.h"
+#include "fdf.h"
 
 void	find_initial_scale(t_map *map)
 {

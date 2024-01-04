@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "../../include/fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 
 void	put_valid_pixel(t_map *map, int x, int y, uint32_t color)

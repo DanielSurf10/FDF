@@ -21,12 +21,13 @@ BONUS_OBJ = $(BONUS_SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@printf "libft compiled\n"
 
 bonus: $(BONUS_OBJ)
 
-%.o: %.c libft.h
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
-	ar rc $(NAME) $@
+	@ar rcs $(NAME) $@
 
 norm:
 	norminette -R CheckForbiddenSourceHeader $(SRC) $(BONUS_SRC) libft.h

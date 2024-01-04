@@ -1,0 +1,5 @@
+*.o
+*.a
+fdf
+fdf_linux
+lib/MLX42/build

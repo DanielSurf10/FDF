@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:54:03 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/03 23:18:04 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:23:01 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_position
 	float		x_angle;
 	float		y_angle;
 	float		z_angle;
+	char		projection;
 }				t_position;
 
 typedef struct s_map
@@ -104,6 +105,8 @@ void			rotation_in_y(t_coordinate *point_1, t_coordinate *point_2,
 					t_map *map);
 void			rotation_in_z(t_coordinate *point_1, t_coordinate *point_2,
 					t_map *map);
+void			isometric(t_map *map);
+void			oblique(t_coordinate *point_1, t_coordinate *point_2);
 void			translate(t_coordinate *point_1, t_coordinate *point_2,
 					t_map *map);
 void			put_valid_pixel(t_map *map, int x, int y, uint32_t color);
@@ -114,6 +117,10 @@ void			slope_bigger_equal_1(t_bres *aux, t_coordinate *point,
 void			bresenham(t_coordinate *point_1, t_coordinate *point_2,
 					t_map *map);
 void			ft_hook(void *param);
+void			rotate(t_map *map);
+void			projection(t_map *map);
+void			increase_descrease_z(t_map *map);
+void			translate_zoom_close(t_map *map);
 void			error(char *err);
 void			free_and_message(t_map *map, char *str);
 void			free_matrix(void **matrix);

@@ -6,11 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:40:05 by cogata            #+#    #+#             */
-/*   Updated: 2023/12/29 01:22:53 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf_bonus.h"
+#include "fdf.h"
 #include <stdio.h>
 
 void	error(char *err)

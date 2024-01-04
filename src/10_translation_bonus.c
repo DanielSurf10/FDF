@@ -6,11 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:42 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/01 23:55:29 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf_bonus.h"
+#include "fdf.h"
 
 void	translate(t_coordinate *point_1, t_coordinate *point_2, t_map *map)
 {

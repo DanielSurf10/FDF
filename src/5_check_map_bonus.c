@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   5_check_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:10 by cogata            #+#    #+#             */
-/*   Updated: 2023/11/20 11:39:11 by cogata           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf_bonus.h"
+#include "fdf.h"
 
 void	check_width_vs_count(int width, int count)
 {
