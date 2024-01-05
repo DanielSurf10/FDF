@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:54:03 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/04 16:23:01 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:04:44 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ typedef struct s_map
 	t_position	position;
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_image;
-	int			line_render;
 	double		time;
 	int			frame;
+	int			line_render: 1;
+	unsigned int	auto_transform_x : 2;
+	unsigned int	auto_transform_y : 2;
+	unsigned int	auto_transform_z : 2;
 }				t_map;
 
 typedef struct s_coordinate
@@ -126,5 +129,7 @@ void			free_and_message(t_map *map, char *str);
 void			free_matrix(void **matrix);
 int				check_fd(char *map_name);
 uint32_t		put_alpha(uint32_t decimal);
+void			key_hook(mlx_key_data_t keydata, void* param);
+
 
 #endif

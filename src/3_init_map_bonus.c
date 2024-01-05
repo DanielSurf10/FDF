@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:00 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/04 16:22:30 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:50:57 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,11 @@ t_map	*init_map(char *map_name)
 	map = initialize_matrix(map_name, width, height);
 	map->width = width;
 	map->height = height;
-	map->line_render = 0;
+	map->line_render = 1;
 	map->time = 0;
 	map->frame = 0;
+	map->auto_transform_x = 0;
+	map->auto_transform_y = 0;
+	map->auto_transform_z = 0;
 	return (map);
 }

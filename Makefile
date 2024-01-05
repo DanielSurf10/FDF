@@ -26,6 +26,7 @@ $(NAME_BONUS): $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME_BONUS)
 
 obj/%.o: src/%.c
+	@mkdir -p obj
 	@$(CC) $(CFLAGS) $(HEADERS) $< -o $@ && printf "Compiling: $(notdir $<)\n"
 
 bonus: all
