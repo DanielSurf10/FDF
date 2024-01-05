@@ -6,25 +6,26 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:56 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/04 16:28:28 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/04 23:32:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf_bonus.h"
+#include "fdf.h"
+#include <stdio.h>
 
 void	rotate(t_map *map)
 {
-	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
-		map->position.x_angle += 2;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
-		map->position.x_angle -= 2;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
-		map->position.y_angle += 2;
+		map->position.x_angle += 2;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
+		map->position.x_angle -= 2;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_E))
+		map->position.y_angle += 2;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_Q))
 		map->position.y_angle -= 2;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_K))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
 		map->position.z_angle += 2;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_J))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
 		map->position.z_angle -= 2;
 }
 
@@ -71,35 +72,55 @@ void	ft_hook(void *param)
 {
 	double	start;
 	double	count_time;
+	double	end;
+	double	delta_time;
 	t_map	*map;
 
 	map = param;
-	map->time += map->mlx->delta_time;
-	if (map->time >= ((1000.0 / 40) / 1000.0))
+	start = mlx_get_time();
+
+	if (map->frame == 24)
 	{
-		if (map->frame == 2)
-		{
-			map->position.y_angle -= 1;
-			map->position.z_angle -= 1;
-			map->frame = 0;
-		}
-		if (mlx_is_key_down(map->mlx, MLX_KEY_F10) && (map->line_render & 2) == 0)
-			map->line_render = map->line_render == 0 ? 1 : 0;
-		if (mlx_is_key_down(map->mlx, MLX_KEY_F10))
-			map->line_render = map->line_render | 2;
-		else
-			map->line_render = map->line_render & 1;
-		translate_zoom_close(map);
-		rotate(map);
-		projection(map);
-		increase_descrease_z(map);
-		mlx_delete_image(map->mlx, map->mlx_image);
-		map->mlx_image = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(map->mlx, map->mlx_image, 0, 0);
-		randomize(map);
-		map->frame += 1;
-		map->time = 0;
+		map->position.z_angle += 45;
+		// map->position.z_angle -= 0.7;
+		map->frame = 0;
 	}
-	// printf("%f\n", map->mlx->delta_time);
+
+	if (mlx_is_key_down(map->mlx, MLX_KEY_F10) && (map->line_render & 2) == 0)
+		map->line_render = map->line_render == 0 ? 1 : 0;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_F10))
+		map->line_render = map->line_render | 2;
+	else
+		map->line_render = map->line_render & 1;
+
+	if (mlx_is_key_down(map->mlx, MLX_KEY_F9))
+	{
+		printf("1 - %f %f %f\n", map->position.x_angle, map->position.y_angle, map->position.z_angle);
+		printf("2 - %d %d %f\n", map->position.x_offset, map->position.y_offset, map->position.z_factor);
+	}
+
+	translate_zoom_close(map);
+	rotate(map);
+	projection(map);
+	increase_descrease_z(map);
+	mlx_delete_image(map->mlx, map->mlx_image);
+	map->mlx_image = mlx_new_image(map->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(map->mlx, map->mlx_image, 0, 0);
+	randomize(map);
+
+	map->frame += 1;
+
+	end = mlx_get_time();
+	delta_time = end - start;
+
+	count_time = mlx_get_time();
+	while (delta_time <= ((1000.0 / 24) / 1000.0))
+	{
+		// count_time++;
+		end = mlx_get_time();
+		delta_time = end - start;
+	}
+
+	// printf("%f %f\n", mlx_get_time() - count_time, map->mlx->delta_time);
 
 }
