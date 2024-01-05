@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cado-car <cado-car@student.42sp.org.br     +#+  +:+       +#+         #
+#    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 20:34:48 by cado-car          #+#    #+#              #
-#    Updated: 2021/10/05 22:54:30 by cado-car         ###   ########.fr        #
+#    Updated: 2024/01/04 22:03:29 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@printf "\n$(CY)Generating FdF executable...$(RC)\n"
 	$(CC) $(CF) -o $(NAME) $(OBJ) -L $(LFT_PATH) -L $(MLX_PATH) -lft $(MLX_CF)
-	mkdir objs
+	mkdir -p objs
 	mv $(OBJ) objs/
 	@printf "$(GR)Done!$(RC)\n\n"
 
@@ -86,11 +86,11 @@ re: fclean all
 
 rebonus: fclean bonus
 
-leaks: 
+leaks:
 	$(LEAKS) $(LF)
 	@printf "$(GR)Leaks log ready! Check valgrind-out.txt $(RC)\n\n"
 
-cleanleaks: 
+cleanleaks:
 	$(RM) $(LEAKS_FILE)
 	@printf "$(GR)Leaks log file deleted.$(RC)\n\n"
 
@@ -98,17 +98,17 @@ clean:
 	@printf "\n$(YE)Cleaning all object files from libft...$(RC)\n"
 	@make clean -C $(LFT_PATH)
 	@printf "$(GR)Libft objects removed!$(RC)\n\n"
-	$(RM) -rf $(OBJ) $(BONUS_OBJ) objs/
+	$(RM) -rf objs/
 
 fclean: clean
 	@printf "\n$(YE)Cleaning all additional objects and libraries...$(RC)\n"
-	$(RM) -rf $(NAME) $(BONUS_OBJ) objs/
+	$(RM) -f $(NAME)
 	@make fclean -C $(LFT_PATH)
 	@make clean -C $(MLX_PATH)
 	@printf "$(GR)All libraries removed!$(RC)\n\n"
 	make cleanleaks
 
-install: 
+install:
 	sudo apt-get install gcc make xorg libxext-dev libbsd-dev -y
 	@printf "$(GR)All dependencies ready!$(RC)\n\n"
 

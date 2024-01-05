@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   project.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cado-car <cado-car@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 20:36:00 by cado-car          #+#    #+#             */
-/*   Updated: 2021/10/04 23:17:43 by cado-car         ###   ########.fr       */
+/*   Updated: 2024/01/01 22:50:08 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <stdio.h>
 
 static void	isometric(t_line *line);
 static void	perspective(t_line *line);

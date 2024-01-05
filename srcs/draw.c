@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cado-car <cado-car@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 19:02:49 by cado-car          #+#    #+#             */
-/*   Updated: 2021/10/05 22:41:17 by cado-car         ###   ########.fr       */
+/*   Updated: 2024/01/01 23:18:47 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+#include <stdio.h>
 
 void	bresenham(t_fdf *fdf, t_point start, t_point end)
 {
