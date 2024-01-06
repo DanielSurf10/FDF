@@ -6,31 +6,40 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:56 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/05 17:46:41 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:40:02 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
+int	is_auto_on(t_map *map)
+{
+	if (map->auto_transform_x != 0
+		|| map->auto_transform_y != 0
+		|| map->auto_transform_z != 0)
+		return (1);
+	return (0);
+}
+
 void	rotate(t_map *map)
 {
-	if ((mlx_is_key_down(map->mlx, MLX_KEY_W) && (map->auto_transform_x & 2) == 0)
+	if ((mlx_is_key_down(map->mlx, MLX_KEY_W) && !is_auto_on(map))
 		|| map->auto_transform_x == 1)
 		map->position.x_angle += 0.7;
-	else if ((mlx_is_key_down(map->mlx, MLX_KEY_S) && (map->auto_transform_x & 2) == 0)
+	if ((mlx_is_key_down(map->mlx, MLX_KEY_S) && !is_auto_on(map))
 		|| map->auto_transform_x == 2)
 		map->position.x_angle -= 0.7;
-	if ((mlx_is_key_down(map->mlx, MLX_KEY_E) && (map->auto_transform_y & 2) == 0)
+	if ((mlx_is_key_down(map->mlx, MLX_KEY_E) && !is_auto_on(map))
 		|| map->auto_transform_y == 1)
 		map->position.y_angle += 0.7;
-	if ((mlx_is_key_down(map->mlx, MLX_KEY_Q) && (map->auto_transform_y & 2) == 0)
+	if ((mlx_is_key_down(map->mlx, MLX_KEY_Q) && !is_auto_on(map))
 		|| map->auto_transform_y == 2)
 		map->position.y_angle -= 0.7;
-	if ((mlx_is_key_down(map->mlx, MLX_KEY_D) && (map->auto_transform_z & 2) == 0)
+	if ((mlx_is_key_down(map->mlx, MLX_KEY_D) && !is_auto_on(map))
 		|| map->auto_transform_z == 1)
 		map->position.z_angle += 0.7;
-	if ((mlx_is_key_down(map->mlx, MLX_KEY_A) && (map->auto_transform_z & 2) == 0)
+	if ((mlx_is_key_down(map->mlx, MLX_KEY_A) && !is_auto_on(map))
 		|| map->auto_transform_z == 2)
 		map->position.z_angle -= 0.7;
 
@@ -96,6 +105,12 @@ void	key_hook(mlx_key_data_t keydata, void* param)
 		// else
 		// 	map->auto_transform_z++;
 
+	if (keydata.key == MLX_KEY_V && keydata.action == MLX_PRESS)
+	{
+		map->auto_transform_x = 0;
+		map->auto_transform_y = 0;
+		map->auto_transform_z = 0;
+	}
 
 }
 
