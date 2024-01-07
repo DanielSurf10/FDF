@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:56 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/06 12:40:02 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:28:27 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,18 @@ void	rotate(t_map *map)
 
 void	projection(t_map *map)
 {
-	if (mlx_is_key_down(map->mlx, MLX_KEY_F1))
-		map->position.projection = '1';
-	if (mlx_is_key_down(map->mlx, MLX_KEY_F2))
-	{
-		map->position.projection = '2';
-		map->position.x_angle = 0;
-		map->position.y_angle = 0;
-		map->position.z_angle = 0;
-	}
+	// if (mlx_is_key_down(map->mlx, MLX_KEY_F1))
+	// 	map->position.projection = '1';
+	// if (mlx_is_key_down(map->mlx, MLX_KEY_F2) || mlx_is_key_down(map->mlx, MLX_KEY_F3))
+	// {
+	// 	if (mlx_is_key_down(map->mlx, MLX_KEY_F2))
+	// 		map->position.projection = '2';
+	// 	else if (mlx_is_key_down(map->mlx, MLX_KEY_F3))
+	// 		map->position.projection = '3';
+	// 	map->position.x_angle = 0;
+	// 	map->position.y_angle = 0;
+	// 	map->position.z_angle = 0;
+	// }
 }
 
 void	increase_descrease_z(t_map *map)
@@ -111,62 +114,61 @@ void	key_hook(mlx_key_data_t keydata, void* param)
 		map->auto_transform_y = 0;
 		map->auto_transform_z = 0;
 	}
+	if (keydata.key == MLX_KEY_F1 && keydata.action == MLX_PRESS)
+		map->position.projection = '1';
+	if ((keydata.key == MLX_KEY_F2 || keydata.key == MLX_KEY_F3)
+		&& keydata.action == MLX_PRESS)
+	{
+		if (keydata.key == MLX_KEY_F2)
+			map->position.projection = '2';
+		else if (keydata.key == MLX_KEY_F3)
+			map->position.projection = '3';
+		map->position.x_angle = 0;
+		map->position.y_angle = 0;
+		map->position.z_angle = 0;
+	}
+	// if (keydata.key == MLX_KEY_F4 && keydata.action == MLX_PRESS)
+	// {
+	// 	map->position.projection = '4';
+	// 	map->mlx_image->enabled = 0;
+	// 	map->mlx_image_front->enabled = 1;
+	// 	map->mlx_image_left->enabled = 1;
+	// 	map->mlx_image_top->enabled = 1;
+	// 	map->mlx_image_projection->enabled = 1;
+	// 	ft_memset(map->mlx_image_front->pixels, 0xAF, (WIDTH / 2) * (HEIGHT / 2) * sizeof(int32_t));
+	// 	ft_memset(map->mlx_image_left->pixels, 0xFF, (WIDTH / 2) * (HEIGHT / 2) * sizeof(int32_t));
+	// 	ft_memset(map->mlx_image_top->pixels, 0x0A, (WIDTH / 2) * (HEIGHT / 2) * sizeof(int32_t));
+	// 	ft_memset(map->mlx_image_projection->pixels, 0xC5, (WIDTH / 2) * (HEIGHT / 2) * sizeof(int32_t));
+	// }
+
+	// if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
+	// 	map->position.scale *= 1.05;
+	// if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
+	// 	map->position.scale /= 1.05;
 
 }
 
 void	ft_hook(void *param)
 {
 	double	start;
+	double	old_start;
 	double	count_time;
 	double	end;
 	double	delta_time;
+	double	in_while_time;
 	t_map	*map;
 
 	map = param;
-	start = mlx_get_time();
-
-	// if (map->frame == 1)
+	// if (mlx_is_key_down(map->mlx, MLX_KEY_F9))
 	// {
-	// 	map->position.z_angle += 0.3;
-	// 	map->position.y_angle += 0.5;
-	// 	map->frame = 0;
+	// 	printf("1 - %f %f %f\n", map->position.x_angle, map->position.y_angle, map->position.z_angle);
+	// 	printf("2 - %d %d %f\n", map->position.x_offset, map->position.y_offset, map->position.z_factor);
 	// }
-
-	// if (mlx_is_key_down(map->mlx, MLX_KEY_F10) && (map->line_render & 2) == 0)
-	// 	map->line_render = map->line_render == 0 ? 1 : 0;
-	// if (mlx_is_key_down(map->mlx, MLX_KEY_F10))
-	// 	map->line_render = map->line_render | 2;
-	// else
-	// 	map->line_render = map->line_render & 1;
-
-	if (mlx_is_key_down(map->mlx, MLX_KEY_F9))
-	{
-		printf("1 - %f %f %f\n", map->position.x_angle, map->position.y_angle, map->position.z_angle);
-		printf("2 - %d %d %f\n", map->position.x_offset, map->position.y_offset, map->position.z_factor);
-	}
 
 	translate_zoom_close(map);
 	rotate(map);
 	projection(map);
 	increase_descrease_z(map);
-	mlx_delete_image(map->mlx, map->mlx_image);
-	map->mlx_image = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(map->mlx, map->mlx_image, 0, 0);
+	ft_bzero(map->mlx_image->pixels, WIDTH * HEIGHT * sizeof(int32_t));
 	randomize(map);
-
-	map->frame += 1;
-
-	end = mlx_get_time();
-	delta_time = end - start;
-
-	count_time = mlx_get_time();
-	while (delta_time <= ((1000.0 / 60) / 1000.0))
-	{
-		// count_time++;
-		end = mlx_get_time();
-		delta_time = end - start;
-	}
-
-	// printf("%f %f\n", mlx_get_time() - count_time, map->mlx->delta_time);
-	printf("%u %u %u\n", map->auto_transform_x, map->auto_transform_y, map->auto_transform_z);
 }

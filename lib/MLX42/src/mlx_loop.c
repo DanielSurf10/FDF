@@ -6,11 +6,12 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 01:24:36 by W2Wizard          #+#    #+#             */
-/*   Updated: 2024/01/03 22:59:39 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:18:21 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42/MLX42_Int.h"
+#include <stdio.h>
 
 //= Private =//
 
@@ -114,5 +115,11 @@ void mlx_loop(mlx_t* mlx)
 
 		glfwSwapBuffers(mlx->window);
 		glfwPollEvents();
+
+		// do
+		// {
+		// 	end = glfwGetTime() - start;
+		// } while (end <= ((1000.0 / 30) / 1000.0));
+		// printf("%f\n", end);
 	}
 }

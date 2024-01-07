@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:16 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:14:16 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,23 @@ void	find_z_factor(t_map *map)
 
 void	init_position(t_map *map)
 {
+	double	x_offset;
+	double	y_offset;
+
 	centralize(map);
 	find_initial_scale(map);
 	map->position.z_factor = 0.5;
 	find_z_factor(map);
+	// if (map->width % 2 != 0)
+	// 	x_offset = WIDTH / 2;
+	// else
+	// 	x_offset = (((WIDTH + (WIDTH / map->width)) / 2.0));
+	// if (map->height % 2 != 0)
+	// 	y_offset = HEIGHT / 2;
+	// else
+	// 	y_offset = (((HEIGHT + (HEIGHT / map->height)) / 2.0));
+	// map->position.x_offset = x_offset;
+	// map->position.y_offset = y_offset;
 	map->position.x_offset = WIDTH / 2;
 	map->position.y_offset = HEIGHT / 2;
 	map->position.projection = '1';

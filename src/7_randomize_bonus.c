@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:21 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/05 16:45:14 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:52:59 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	transform(t_coordinate *point_1, t_coordinate *point_2, t_map *map)
 {
 	scale(point_1, point_2, map);
-	if (map->position.projection == '1')
+	if (map->position.projection == '1')			// Transformação isométrica
 		isometric(map);
-	else if (map->position.projection == '2')
+	else if (map->position.projection == '2')		// Transformação oblíqua
 		oblique(point_1, point_2);
+	// else if (map->position.projection == '2')	// Transformação top view
+	// 	top_view(map);
+	// else if (map->position.projection == '3')		// Transformação 3 vistas
+	// 	three_views(map);
 	rotation_in_z(point_1, point_2, map);
 	rotation_in_x(point_1, point_2, map);
 	rotation_in_y(point_1, point_2, map);
