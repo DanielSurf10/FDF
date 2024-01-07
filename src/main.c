@@ -112,28 +112,18 @@ int	main(void)
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		ft_error();
 
 	/* Do stuff */
 
 	// Create and display the image.
 	mlx_image_t* fundo = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!fundo || (mlx_image_to_window(mlx, fundo, 0, 0) < 0))
-		ft_error();
+	mlx_image_to_window(mlx, fundo, 0, 0);
 	mlx_set_instance_depth(fundo->instances, 0);
-	// memset(fundo->pixels, 0xAF, fundo->width * fundo->height * sizeof(int32_t));
 	memset(fundo->pixels, 0xAF, fundo->width * fundo->height * sizeof(int32_t));
 
 	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
+	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_set_instance_depth(img->instances, 1);
-
-	// memset(img->pixels, 0xAF0000FF, img->width * img->height * sizeof(int32_t));
-
-	// Even after the image is being displayed, we can still modify the buffer.
-	// mlx_put_pixel(img, 10, 10, 0xFF0000FF);
 
 	// for (int i = 0; i < 6; i++)
 	// {
@@ -152,6 +142,8 @@ int	main(void)
 	// mlx_set_icon(mlx, texture);
 	// mlx_image_t* imagem = mlx_texture_to_image(mlx, texture);
 	// mlx_image_to_window(mlx, imagem, 0, 0);
+
+	// img->enabled = 1;
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
