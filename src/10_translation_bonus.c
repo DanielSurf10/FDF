@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:42 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/07 15:15:59 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/08 01:05:38 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,18 @@ void	translate(t_coordinate *point_1, t_coordinate *point_2, t_map *map)
 	// int y_offset;
 
 	// get_translation(map, &x_offset, &y_offset);
-	point_1->x += map->position.x_offset;
-	point_1->y += map->position.y_offset;
-	point_2->x += map->position.x_offset;
-	point_2->y += map->position.y_offset;
+	if (map->position.projection == '4')
+	{
+		point_1->x += map->position.x_offset / 2;
+		point_1->y += (map->position.y_offset / 2);
+		point_2->x += map->position.x_offset / 2;
+		point_2->y += (map->position.y_offset / 2);
+	}
+	else
+	{
+		point_1->x += map->position.x_offset;
+		point_1->y += map->position.y_offset;
+		point_2->x += map->position.x_offset;
+		point_2->y += map->position.y_offset;
+	}
 }

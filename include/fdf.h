@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:54:03 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/07 19:23:31 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/07 23:40:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ typedef struct s_map
 	t_position	position;
 	mlx_t		*mlx;
 	mlx_image_t	*mlx_image;
-	// mlx_image_t	*mlx_image_front;
-	// mlx_image_t	*mlx_image_left;
-	// mlx_image_t	*mlx_image_top;
-	// mlx_image_t	*mlx_image_projection;
+	mlx_image_t	*mlx_image_projection;		// First to render in Fourth quadrant
+	mlx_image_t	*mlx_image_front;			// Second, first
+	mlx_image_t	*mlx_image_left;			// Third, second
+	mlx_image_t	*mlx_image_top;				// Fourth, third
+	int			image_to_render;
 	double		time;
 	int			frame;
 	int			line_render: 1;

@@ -15,8 +15,25 @@
 
 void	put_valid_pixel(t_map *map, int x, int y, uint32_t color)
 {
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-		mlx_put_pixel(map->mlx_image, x, y, color);
+	if (map->position.projection == '4')
+	{
+		if (x >= 0 && x < WIDTH / 2 && y >= 0 && y < HEIGHT / 2)
+		{
+			if (map->image_to_render == 0)
+				mlx_put_pixel(map->mlx_image_projection, x, y, color);
+			else if (map->image_to_render == 1)
+				mlx_put_pixel(map->mlx_image_front, x, y, color);
+			else if (map->image_to_render == 2)
+				mlx_put_pixel(map->mlx_image_left, x, y, color);
+			else if (map->image_to_render == 3)
+				mlx_put_pixel(map->mlx_image_top, x, y, color);
+		}
+	}
+	else
+	{
+		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+			mlx_put_pixel(map->mlx_image, x, y, color);
+	}
 }
 
 void	check_delta_to_move_variable(int d, int *variable)

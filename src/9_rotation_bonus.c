@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:39:32 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/04 16:22:13 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/08 01:01:42 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	rotation_in_z(t_coordinate *point_1, t_coordinate *point_2, t_map *map)
 
 void	isometric(t_map *map)
 {
-	map->position.x_angle = 54.73;
+	map->position.x_angle = 60;
 	map->position.y_angle = 0;
-	map->position.z_angle = -45;
+	map->position.z_angle = 45;
 	map->position.projection = '0';
 }
 

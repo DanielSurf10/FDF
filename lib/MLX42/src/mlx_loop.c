@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 01:24:36 by W2Wizard          #+#    #+#             */
-/*   Updated: 2024/01/07 16:18:21 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/08 00:45:19 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void mlx_loop(mlx_t* mlx)
 		// do
 		// {
 		// 	end = glfwGetTime() - start;
-		// } while (end <= ((1000.0 / 30) / 1000.0));
+		// } while (end <= ((1000.0 / 60) / 1000.0));
 		// printf("%f\n", end);
 	}
 }

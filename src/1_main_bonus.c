@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 11:38:49 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/07 19:23:21 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/08 00:28:01 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,30 @@ int32_t	main(int32_t argc, char *argv[])
 	map->mlx = mlx;
 
 	map->mlx_image = mlx_new_image(map->mlx, WIDTH, HEIGHT);
-	// map->mlx_image_front = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
-	// map->mlx_image_left = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
-	// map->mlx_image_top = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
-	// map->mlx_image_projection = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
+	map->mlx_image_front = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
+	map->mlx_image_left = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
+	map->mlx_image_top = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
+	map->mlx_image_projection = mlx_new_image(map->mlx, WIDTH / 2, HEIGHT / 2);
 
 	init_position(map);
 	randomize(map);
 
 	mlx_image_to_window(mlx, map->mlx_image, 0, 0);
-	// mlx_image_to_window(mlx, map->mlx_image_front, 0, 0);
-	// mlx_image_to_window(mlx, map->mlx_image_left, WIDTH / 2, 0);
-	// mlx_image_to_window(mlx, map->mlx_image_top, 0, HEIGHT / 2);
-	// mlx_image_to_window(mlx, map->mlx_image_projection, WIDTH / 2, HEIGHT / 2);
-	// mlx_set_instance_depth(map->mlx_image->instances, 1);
-	// mlx_set_instance_depth(map->mlx_image_front->instances, 0);
-	// mlx_set_instance_depth(map->mlx_image_left->instances, 0);
-	// mlx_set_instance_depth(map->mlx_image_top->instances, 0);
-	// mlx_set_instance_depth(map->mlx_image_projection->instances, 0);
+	mlx_image_to_window(mlx, map->mlx_image_front, 0, 0);
+	mlx_image_to_window(mlx, map->mlx_image_left, WIDTH / 2, 0);
+	mlx_image_to_window(mlx, map->mlx_image_top, 0, HEIGHT / 2);
+	mlx_image_to_window(mlx, map->mlx_image_projection, WIDTH / 2, HEIGHT / 2);
+	mlx_set_instance_depth(map->mlx_image->instances, 1);
+	mlx_set_instance_depth(map->mlx_image_front->instances, 0);
+	mlx_set_instance_depth(map->mlx_image_left->instances, 0);
+	mlx_set_instance_depth(map->mlx_image_top->instances, 0);
+	mlx_set_instance_depth(map->mlx_image_projection->instances, 0);
 
-	// map->mlx_image_front->enabled = 0;
-	// map->mlx_image_left->enabled = 0;
-	// map->mlx_image_top->enabled = 0;
-	// map->mlx_image_projection->enabled = 0;
+	map->mlx_image_front->enabled = 0;
+	map->mlx_image_left->enabled = 0;
+	map->mlx_image_top->enabled = 0;
+	map->mlx_image_projection->enabled = 0;
+	// map->mlx_image = 0;
 
 	// memset(map->mlx_image_front->pixels, 0xAF, (WIDTH / 2) * (HEIGHT / 2) * sizeof(int32_t));
 	// memset(map->mlx_image_left->pixels, 0xFF, (WIDTH / 2) * (HEIGHT / 2) * sizeof(int32_t));
