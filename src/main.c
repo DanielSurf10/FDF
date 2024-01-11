@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:29:39 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argv, char *argc[])
 		print_error();	// Argumentos errados
 		exit(0);
 	}
-	
+
 
 	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
