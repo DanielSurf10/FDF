@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/09 18:54:03 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/28 06:37:08 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	size_t			i;
+	unsigned char	*mem;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
-	{
-		print_error();	// Argumentos errados
-		exit(0);
-	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	i = 0;
+	mem = (unsigned char *) s;
+	if (!s)
+		return (NULL);
+	while (i < n && mem[i] != (unsigned char) c)
+		i++;
+	if (i == n)
+		return (NULL);
+	return ((void *) s + i);
 }

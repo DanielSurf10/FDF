@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/21 15:04:25 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/21 16:58:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+static int	letter_is(char c, const char *set)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
+	size_t	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-int	main(int argv, char *argc[])
+char	*ft_strtrim(char const *str, char const *set)
 {
-	mlx_t*	mlx;
+	size_t	first;
+	size_t	len;
 
-	if (argv != 2)
-	{
-		print_error();	// Argumentos errados
-		exit(0);
-	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	first = 0;
+	len = ft_strlen(str);
+	while (letter_is(str[first], set))
+		first++;
+	while (letter_is(str[len - 1], set))
+		len--;
+	return (ft_substr(str, first, len - first));
 }

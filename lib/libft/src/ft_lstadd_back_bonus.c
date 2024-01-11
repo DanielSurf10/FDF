@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/27 17:25:28 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/27 17:33:51 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	t_list	*last_node;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
-	{
-		print_error();	// Argumentos errados
-		exit(0);
-	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	last_node = ft_lstlast(*lst);
+	if (last_node)
+		last_node->next = new;
+	else
+		*lst = new;
 }

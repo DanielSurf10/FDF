@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/27 17:57:07 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/27 18:06:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	t_list	*aux1;
+	t_list	*aux2;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
+	if (lst)
 	{
-		print_error();	// Argumentos errados
-		exit(0);
+		aux1 = *lst;
+		while (aux1)
+		{
+			aux2 = aux1->next;
+			ft_lstdelone(aux1, del);
+			aux1 = aux2;
+		}
+		*lst = NULL;
 	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
 }

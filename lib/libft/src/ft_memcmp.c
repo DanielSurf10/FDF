@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/18 16:13:38 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/28 22:30:41 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	size_t			i;
+	unsigned char	*mem_s1;
+	unsigned char	*mem_s2;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
-	{
-		print_error();	// Argumentos errados
-		exit(0);
-	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	i = 0;
+	mem_s1 = (unsigned char *) s1;
+	mem_s2 = (unsigned char *) s2;
+	if (!n)
+		return (0);
+	while (i < n - 1 && mem_s1[i] == mem_s2[i])
+		i++;
+	return (mem_s1[i] - mem_s2[i]);
 }

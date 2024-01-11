@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/13 19:13:05 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/28 22:18:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+char	*ft_strdup(const char *s)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	size_t	i;
+	char	*dup;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
-	{
-		print_error();	// Argumentos errados
-		exit(0);
-	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	i = ft_strlen((char *) s) + 1;
+	dup = malloc(i);
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, s, i);
+	return (dup);
 }

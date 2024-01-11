@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/06 17:39:44 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/11/02 15:37:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	int	i;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
+	i = ft_strlen(s);
+	if (!s)
+		return (NULL);
+	if ((unsigned char) c == '\0')
+		return ((char *) s + i);
+	while (i >= 0)
 	{
-		print_error();	// Argumentos errados
-		exit(0);
+		if (s[i] == (unsigned char) c)
+			return ((char *) s + i);
+		i--;
 	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	return (0);
 }

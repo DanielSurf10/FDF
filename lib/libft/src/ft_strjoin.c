@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:26 by danbarbo         ###   ########.fr       */
+/*   Created: 2023/10/20 15:52:49 by danbarbo          #+#    #+#             */
+/*   Updated: 2023/10/28 22:34:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-static void print_error(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	write(1, "Error\n", 7);
-	exit(EXIT_FAILURE);
-}
+	int		size_all;
+	char	*join;
 
-int	main(int argv, char *argc[])
-{
-	mlx_t*	mlx;
-
-	if (argv != 2)
-	{
-		print_error();	// Argumentos errados
-		exit(0);
-	}
-	
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
-		print_error();
+	size_all = ft_strlen(s1) + ft_strlen(s2);
+	join = 0;
+	size_all++;
+	join = (char *) malloc(size_all);
+	if (!join)
+		return (NULL);
+	ft_strlcpy(join, s1, size_all);
+	ft_strlcat(join, s2, size_all);
+	return (join);
 }

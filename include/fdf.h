@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/01 19:13:28 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:32:06 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,28 @@
 # define WIDTH 1024
 # define HEIGHT 1024
 
-typedef struct s_point
+# define NUMBER_IMAGES 3
+
+typedef struct	fdf
+{
+	void		*mlx;
+	mlx_image	*images[NUMBER_IMAGES];
+};
+
+
+typedef struct	s_point
 {
 	int			x;
 	int			y;
+	int			z;
 	uint32_t	color;
 }	t_point;
 
-typedef struct s_keys
-{
-	int	key_p : 1;		// Botão de mudar a perspectiva
-	int	key_line : 1;	// Botão para mudar o algoritmo de fazer a linha
-} t_keys;
+// typedef struct s_keys
+// {
+// 	int	key_p : 1;		// Botão de mudar a perspectiva
+// 	int	key_line : 1;	// Botão para mudar o algoritmo de fazer a linha
+// } t_keys;
 
 void	draw_line(void *img, t_point *point_0, t_point *point_1);
 void	print_big_pixel(void *img, int x, int y, uint32_t color);

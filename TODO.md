@@ -9,9 +9,6 @@ Estruturas:
 
 		(estrutura do mapa aqui)
 
-		s_keys	last_state_keys
-			O último estado de cada botão a ser utilizado
-
 
 	Estrutura botões:
 		Usar uma struct para cada botão para salvar o estado anterior usando C - Bit Fields
@@ -38,7 +35,8 @@ Estruturas:
 		int para o z_scale
 			Muda no runtime, e isso multiplica o z original para renderizar
 
-		Não precisa de cor, é só pegar esse ponto z e maior z que tem no mapa e descobrir a cor na hora que for renderizar
+		~Não precisa de cor, é só pegar esse ponto z e maior z que tem no mapa e descobrir a cor na hora que for renderizar~
+			OBS: talvez isso mude
 
 	Estrutura t_line
 		t_point start
