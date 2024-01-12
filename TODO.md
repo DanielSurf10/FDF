@@ -4,8 +4,18 @@ Estruturas:
 			as coisas da mlx
 
 		as janelas que vão precisar
-			void	*window_background
-			void	*window_render
+			Seria asssim:
+				mlx_image_t	*window_background
+				mlx_image_t	*window_render
+				mlx_image_t	*window_string
+
+			Mas pode ser assim:
+				# define NUMBER_IMAGES 3
+				mlx_image_t	*images[NUMBER_IMAGES]
+
+		t_camera	camera
+			variáveis para a câmera
+
 
 		(estrutura do mapa aqui)
 
@@ -23,20 +33,33 @@ Estruturas:
 
 	Estrutura mapa:
 		Vai ser uma matriz de t_point
+			Uma matriz como um array [x + y * height]
+
 		int para o maior valor de z
 		int para a largura do mapa (x)
 		int para a altura do mapa (y)
 
-
 	Estrutura t_point:
 		int para o x
 		int para o y
-		int para o z (original do mapa)
-		int para o z_scale
-			Muda no runtime, e isso multiplica o z original para renderizar
+		int para o z
+		t_color para a cor;
 
-		~Não precisa de cor, é só pegar esse ponto z e maior z que tem no mapa e descobrir a cor na hora que for renderizar~
-			OBS: talvez isso mude
+	Estrutura t_color (union):
+		int para o rgba
+		struct
+			int r:8
+			int g:8
+			int b:8
+			int a:8
+
+	Estrutura t_camera:
+		int	para x_offset
+		int	para y_offset
+		int	para z_offset
+		int	para x_angle
+		int	para y_angle
+		int	para z_angle
 
 	Estrutura t_line
 		t_point start
@@ -79,3 +102,4 @@ Ideias:
 			Nesse modo, os botões de girar funcionarão em modo único
 				Apertou uma vez só pode girar de novo se apertar de novo
 				Segurou o botão não acontece nada além de girar uma vez só na borda de descida
+			Ao invés de 4 imagens pode ser 1 só, mas o começo é no meio da imagem dependendo de qual for
