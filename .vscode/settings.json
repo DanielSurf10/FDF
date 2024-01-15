@@ -1,7 +1,8 @@
 {
 	"cmake.configureOnOpen": false,
 	"files.associations": {
-		"random": "c"
+		"random": "c",
+		"cstdlib": "c"
 	},
 	"C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

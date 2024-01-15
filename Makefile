@@ -6,7 +6,7 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/27 15:54:27 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/12 18:32:33 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/01/15 15:19:35 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,23 @@ CFLAGS	:= -Wunreachable-code -Ofast -g3
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include/MLX42 -I ${LIBFT}/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:= $(shell find ./src -iname "*.c")
-OBJS	:= ${SRCS:src/.c=obj/.o}
+HEADERS	:= -I ./include \
+			-I ${LIBFT}/include \
+			-I $(LIBMLX)/include/MLX42
+
+LIBS	:= $(LIBMLX)/build/libmlx42.a \
+			${LIBFT}/libft.a \
+			-ldl -lglfw -pthread -lm
+			
+SRCS	:= $(shell find src -iname "*.c")
+OBJS	:= ${SRCS:src/%.c=obj/%.o}
 
 all: $(NAME)
 $(NAME): libmlx libft $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 obj/%.o: src/%.c
+	@mkdir -p obj
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 	@printf "Compiling: $(notdir $<)\n"
 

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/12 18:29:06 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:39:55 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <fcntl.h>
 # include "MLX42.h"
 # include "libft.h"
 
@@ -28,14 +29,20 @@
 # define HEIGHT 1024
 
 # define NUMBER_IMAGES 3
+# define BUFFER_SIZE 50
 
-// typedef struct	s_point
-// {
-// 	int			x;
-// 	int			y;
-// 	int			z;
-// 	uint32_t	color;
-// }	t_point;
+# define ERROR_INVALID_ARGUMENTS_MSG "Wrong usage. \
+Expected './fdf <file_path>'."
+
+# define ERROR_FILE_MSG "File error. \
+The file cannot be opened."
+
+enum e_erros
+{
+	SUCCESS = 0,
+	FILE_ERROR,
+	DESPROPORCIONAL_MAP_ERROR
+};
 
 typedef struct s_color_rgba
 {
@@ -79,9 +86,10 @@ typedef struct s_map
 
 typedef struct s_fdf
 {
-	t_camera	camera;
-	mlx_image_t	*images[NUMBER_IMAGES];
 	void		*mlx;
+	mlx_image_t	*images[NUMBER_IMAGES];
+	t_camera	camera;
+	t_map		map;
 }	t_fdf;
 
 // typedef struct s_keys
@@ -92,6 +100,20 @@ typedef struct s_fdf
 
 void	draw_line(void *img, t_point *point_0, t_point *point_1);
 void	print_big_pixel(void *img, int x, int y, uint32_t color);
+
+
+// Functions
+// Main
+
+int		create_map(t_fdf *fdf_data, char *file_path);
+
+// Utils
+
+int		get_height(char *str);
+int		get_width(char *str);
+t_point	get_node_map(t_map *map, int x, int y);
+void	set_node_map(t_map *map, t_point point, int x, int y);
+
 
 
 #endif

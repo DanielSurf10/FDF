@@ -1,0 +1,118 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 15:25:44 by danbarbo          #+#    #+#             */
+/*   Updated: 2024/01/15 19:38:09 by danbarbo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+static char	*ft_read_all(int fd)
+{
+	int		chars_readed;
+	char	*temp_buffer;
+	char	*file_string;
+	char	*aux;
+
+	chars_readed = 1;
+	temp_buffer = (char *) malloc((BUFFER_SIZE + 1));
+	file_string = ft_strdup("");
+	while (chars_readed > 0)
+	{
+		chars_readed = read(fd, temp_buffer, BUFFER_SIZE);
+		temp_buffer[chars_readed] = '\0';
+		aux = file_string;
+		file_string = ft_strjoin(file_string, temp_buffer);
+		free(aux);
+	}
+	free(temp_buffer);
+	return (file_string);
+}
+
+// Essa função verifica se todas as linhas tem o mesmo tamanho
+static int	validate_width_map(char *file_string, int width)
+{
+	int		str_lenght;
+	int		width_test;
+	char	*tmp_string;
+
+	tmp_string = file_string;
+	str_lenght = ft_strlen(file_string);
+	while (tmp_string)
+	{
+		if (tmp_string[0] == '\0' && *(tmp_string - 1) == '\n')
+			break ;
+		width_test = get_width(tmp_string);
+		if (width_test != width)
+			return (DESPROPORCIONAL_MAP_ERROR);
+		tmp_string = ft_strchr(tmp_string, '\n');
+		if (tmp_string)
+			tmp_string += 1;
+	}
+	return (SUCCESS);
+}
+
+static int	inicializate_map(t_map *map, char *file_string)
+{
+	t_point	aux;
+	t_point	to_place_in_map;
+
+	aux.y = 0;
+	map->map = malloc(map->width * map->height * sizeof(t_point));
+	while (aux.y < map->height)
+	{
+		aux.x = 0;
+		while (aux.x < map->width)
+		{
+			to_place_in_map.x = aux.x - (map->width / 2);
+			to_place_in_map.y = aux.y - (map->height / 2);
+			set_node_map(map, to_place_in_map, aux.x, aux.y);
+			aux.x += 1;
+		}
+		aux.y += 1;
+	}
+	return (SUCCESS);
+}
+
+static int	parse_map(t_map *map, char *file_string)
+{
+	int	return_code;
+
+	map->width = get_width(file_string);
+	map->height = get_height(file_string);
+	if (map->width < 2 || map->height < 2)
+		return (DESPROPORCIONAL_MAP_ERROR);
+	return_code = validate_width_map(file_string, map->width);
+	if (return_code != SUCCESS)
+		return (return_code);
+	return_code = inicializate_map(map, file_string);
+	return (return_code);
+}
+
+int	create_map(t_fdf *fdf_data, char *file_path)
+{
+	int		fd;
+	int		return_code;
+	char	*file_string;
+
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0 || read(fd, 0, 0) < 0)
+		return (FILE_ERROR);
+	file_string = ft_read_all(fd);
+	if (ft_strlen(file_string) == 0)
+	{
+		free(file_string);
+		return (FILE_ERROR);
+	}
+	return_code = parse_map(&(fdf_data->map), file_string);
+	free(file_string);
+	if (return_code == DESPROPORCIONAL_MAP_ERROR)
+		return (DESPROPORCIONAL_MAP_ERROR);
+	free(fdf_data->map.map);
+	return (SUCCESS);
+}
