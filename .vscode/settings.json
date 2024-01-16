@@ -2,7 +2,8 @@
 	"cmake.configureOnOpen": false,
 	"files.associations": {
 		"random": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"sstream": "c"
 	},
 	"C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

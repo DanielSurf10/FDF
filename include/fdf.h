@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/15 22:26:05 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:39:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 Expected './fdf <file_path>'."
 
 # define ERROR_FILE_MSG "File error. \
-The file cannot be opened."
+Invalid File."
 
 enum e_erros
 {
@@ -106,6 +106,9 @@ void	print_big_pixel(void *img, int x, int y, uint32_t color);
 // Main
 
 int		create_map(t_fdf *fdf_data, char *file_path);
+int		validate_map(char *file_string);
+int		parse_map(t_map *map, char *file_string);
+
 
 // Utils
 
@@ -113,7 +116,7 @@ int		get_height(char *str);
 int		get_width(char *str);
 t_point	get_node_map(t_map *map, int x, int y);
 void	set_node_map(t_map *map, t_point point, int x, int y);
-char	*ft_read_all(int fd);
+// char	*ft_read_all(int fd);
 
 
 
