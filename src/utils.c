@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:35 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/15 19:18:21 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:25:51 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,26 @@ t_point	get_node_map(t_map *map, int x, int y)
 void	set_node_map(t_map *map, t_point point, int x, int y)
 {
 	map->map[x + y * map->height] = point;
+}
+
+char	*ft_read_all(int fd)
+{
+	int		chars_readed;
+	char	*temp_buffer;
+	char	*file_string;
+	char	*aux;
+
+	chars_readed = 1;
+	temp_buffer = (char *) malloc((BUFFER_SIZE + 1));
+	file_string = ft_strdup("");
+	while (chars_readed > 0)
+	{
+		chars_readed = read(fd, temp_buffer, BUFFER_SIZE);
+		temp_buffer[chars_readed] = '\0';
+		aux = file_string;
+		file_string = ft_strjoin(file_string, temp_buffer);
+		free(aux);
+	}
+	free(temp_buffer);
+	return (file_string);
 }

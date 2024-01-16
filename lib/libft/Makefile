@@ -6,7 +6,7 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 19:29:07 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/09 17:32:46 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/01/15 23:44:28 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INCLUDE	= include
 
 SRC	= ${addprefix src/, \
 			ft_atoi.c \
+			ft_atoi_hex.c \
 			ft_bzero.c \
 			ft_calloc.c \
 			ft_isalnum.c \
