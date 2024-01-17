@@ -33,9 +33,11 @@ int	ft_atoi_hex(char *str)
 	i = 0;
 	sign = 1;
 	decimal = 0;
+	if (!str)
+		return (0);
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (ft_strncmp(str + i, "0x", 2))
+	if (ft_strncmp(str + i, "0x", 2) == 0)
 		i += 2;
 	num = ishex(str[i]);
 	while (num >= 0)

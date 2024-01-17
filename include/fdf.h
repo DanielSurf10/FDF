@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/16 18:39:36 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:34:26 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	print_big_pixel(void *img, int x, int y, uint32_t color);
 
 int		create_map(t_fdf *fdf_data, char *file_path);
 int		validate_map(char *file_string);
-int		parse_map(t_map *map, char *file_string);
+void	parse_map(t_map *map, char *file_string);
 
 
 // Utils

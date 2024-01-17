@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:36:57 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/15 23:44:12 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:41:40 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*ft_strtrim(char const *str, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_split(char const *s, char c);
+void	*ft_free_split(char **split);
 
 /* printing functions */
 

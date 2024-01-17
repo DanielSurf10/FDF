@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:35 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/16 16:10:32 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:43:32 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	get_width(char *str)
 
 t_point	get_node_map(t_map *map, int x, int y)
 {
-	return (map->map[x + y * map->height]);
+	return (map->map[x + y * map->width]);
 }
 
 void	set_node_map(t_map *map, t_point point, int x, int y)
 {
-	map->map[x + y * map->height] = point;
+	map->map[x + y * map->width] = point;
 }
 
 // char	*ft_read_all(int fd)

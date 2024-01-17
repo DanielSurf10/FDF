@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:49:53 by danbarbo          #+#    #+#             */
-/*   Updated: 2023/10/28 22:39:30 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:41:21 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ static int	next_word_size(char const *s, char sep)
 	return (size);
 }
 
+void	*ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	size_t	i;
@@ -59,6 +73,8 @@ char	**ft_split(char const *s, char c)
 			i++;
 		word_size = next_word_size(s + i, c);
 		split[word_iter] = ft_substr(s + i, 0, word_size);
+		if (split[word_iter] == NULL)
+			return (ft_free_split(split));
 		i += word_size;
 		word_iter++;
 	}

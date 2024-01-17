@@ -6,13 +6,13 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 19:29:07 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/15 23:44:28 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/01/17 17:06:28 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -c
+FLAGS	= -Wall -Wextra -Werror -c -g3
 INCLUDE	= include
 
 SRC	= ${addprefix src/, \

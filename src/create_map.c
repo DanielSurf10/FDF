@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:25:44 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/16 18:40:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:29:50 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,33 @@ int	create_map(t_fdf *fdf_data, char *file_path)
 	if (fd < 0 || read(fd, 0, 0) < 0)
 		return (FILE_ERROR);
 	file_string = ft_read_all(fd);
-	return_code = validate_map(file_string);		// Esse só valida, e não faz mais nada
-	if (return_code != SUCCESS)
-	{
-		free(file_path);
-		return (FILE_ERROR);
-	}
-	return_code = parse_map(&(fdf_data->map), file_string);		// Esse faz o parsing, o que engloba ter que pegar o width e o hight
+	// return_code = validate_map(file_string);		// Esse só valida, e não faz mais nada
+	// if (return_code == SUCCESS)
+	// 	parse_map(&(fdf_data->map), file_string);	// Esse faz o parsing, o que engloba ter que pegar o width e o hight
+	parse_map(&(fdf_data->map), file_string);
 	free(file_string);
-	if (return_code == DESPROPORCIONAL_MAP_ERROR)
-		return (DESPROPORCIONAL_MAP_ERROR);
-	free(fdf_data->map.map);
+
+// 	t_point aux;
+// 	aux.x = 0;
+// 	aux.y = 0;
+//
+//
+// 	puts("");
+// 	while (aux.y < fdf_data->map.height)
+// 	{
+// 		aux.x = 0;
+// 		while (aux.x < fdf_data->map.width)
+// 		{
+// 			printf("%2X", get_node_map(&(fdf_data->map), aux.x, aux.y).z);
+// 			aux.x++;
+// 		}
+// 		aux.y++;
+// 		puts("");
+// 	}
+
+
+	// if (return_code == DESPROPORCIONAL_MAP_ERROR)
+	// 	return (DESPROPORCIONAL_MAP_ERROR);
+	// free(fdf_data->map.map);
 	return (SUCCESS);
 }
