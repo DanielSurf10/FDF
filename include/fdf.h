@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/17 13:34:26 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:45:15 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,18 @@
 # define NUMBER_IMAGES 3
 # define BUFFER_SIZE 50
 
-# define ERROR_INVALID_ARGUMENTS_MSG "Wrong usage. \
-Expected './fdf <file_path>'."
-
-# define ERROR_FILE_MSG "File error. \
-Invalid File."
+// # define ERROR_INVALID_ARGUMENTS_MSG "Wrong usage. \
+// Expected './fdf <file_path>'."
+//
+// # define ERROR_FILE_MSG "File error. \
+// Invalid File."
 
 enum e_erros
 {
 	SUCCESS = 0,
+	INVALID_ARGUMENTS_ERROR,
 	FILE_ERROR,
-	DESPROPORCIONAL_MAP_ERROR
+	// DESPROPORCIONAL_MAP_ERROR
 };
 
 typedef struct s_color_rgba

@@ -3,7 +3,8 @@
 	"files.associations": {
 		"random": "c",
 		"cstdlib": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"stdio.h": "c"
 	},
 	"C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }

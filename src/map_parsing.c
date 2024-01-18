@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:12 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/17 17:29:19 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:47:04 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ static void	inicializate_map(t_map *map, char *file_string)
 
 void	parse_map(t_map *map, char *file_string)
 {
-	int	return_code;
-
 	map->width = get_width(file_string);
 	map->height = get_height(file_string);
 	map->map = malloc(map->width * map->height * sizeof(t_point));
