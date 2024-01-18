@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/18 14:45:15 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:36:08 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,19 @@
 // # define ERROR_FILE_MSG "File error. \
 // Invalid File."
 
-enum e_erros
+enum e_errors
 {
 	SUCCESS = 0,
 	INVALID_ARGUMENTS_ERROR,
-	FILE_ERROR,
-	// DESPROPORCIONAL_MAP_ERROR
+	FILE_ERROR
 };
+
+enum e_images
+{
+	BACKGROUND = 0,
+	RENDER,
+	STRING
+}
 
 typedef struct s_color_rgba
 {
@@ -67,21 +73,28 @@ typedef struct s_point
 	t_color		color;
 }	t_point;
 
+typedef struct s_line
+{
+	t_point	point_1;
+	t_point	point_2;
+}	t_line;
+
 typedef struct s_camera
 {
 	int	x_offset;
 	int	y_offset;
-	int	z_offset;
 	int	x_angle;
 	int	y_angle;
 	int	z_angle;
+	int	z_factor;
+	int	scale;
 }	t_camera;
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
-	int		max_z;
+	int		max_z;				// Não sei se isso é necessário
 	t_point	*map;
 }	t_map;
 
@@ -109,6 +122,8 @@ void	print_big_pixel(void *img, int x, int y, uint32_t color);
 int		create_map(t_fdf *fdf_data, char *file_path);
 int		validate_map(char *file_string);
 void	parse_map(t_map *map, char *file_string);
+void	frame(void *param);
+void	render(t_fdf *fdf_data);
 
 
 // Utils
