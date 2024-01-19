@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/18 20:38:00 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:02:59 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	main(int argv, char *argc[])
 	fdf_data.camera.x_offset = 0;
 	fdf_data.camera.y_offset = 0;
 	fdf_data.camera.z_factor = 1;		// É 1 pq é 100% do z
-	// fdf_data.camera.scale = 
+	fdf_data.camera.scale_width = WIDTH / fdf_data.map.width;
+	fdf_data.camera.scale_height = HEIGHT / fdf_data.map.height;
+	fdf_data.camera.line_tracer = XIAOLIN;
 
 	// Colocar os hooks
 

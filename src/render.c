@@ -6,18 +6,15 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:47:30 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/18 19:35:33 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:35:34 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	transform_line(t_fdf *fdf_data, t_line line)
+static void	draw_line(mlx_image_t *img, t_line line)
 {
-	point_1->x *= map->position.scale;
-	point_1->y *= map->position.scale;
-	point_2->x *= map->position.scale;
-	point_2->y *= map->position.scale;
+
 }
 
 void	render(t_fdf *fdf_data)
@@ -35,16 +32,15 @@ void	render(t_fdf *fdf_data)
 			if ((aux.x + 1) < fdf_data->map.width)
 			{
 				line.point_2 = get_node_map(&(fdf_data->mlx), aux.x + 1, aux.y);
-				transform_line(fdf_data, line);
-				draw_line(fdf_data->images[RENDER], &(line.point_1), &(line.point_2));
+				transform_line(fdf_data, &line);
+				draw_line(fdf_data->images[RENDER], line);
 			}
-
 
 			if ((aux.y + 1) < fdf_data->map.height)
 			{
 				line.point_2 = get_node_map(&(fdf_data->mlx), aux.x, aux.y + 1);
-				transform_line(fdf_data, line);
-				draw_line(fdf_data->images[RENDER], &(line.point_1), &(line.point_2));
+				transform_line(fdf_data, &line);
+				draw_line(fdf_data->images[RENDER], line);
 			}
 			aux.x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/18 19:36:08 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:36:42 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include <math.h>
 # include "MLX42.h"
 # include "libft.h"
 
@@ -30,6 +31,7 @@
 
 # define NUMBER_IMAGES 3
 # define BUFFER_SIZE 50
+# define PI 3.14159
 
 // # define ERROR_INVALID_ARGUMENTS_MSG "Wrong usage. \
 // Expected './fdf <file_path>'."
@@ -49,7 +51,13 @@ enum e_images
 	BACKGROUND = 0,
 	RENDER,
 	STRING
-}
+};
+
+enum e_line_tracer
+{
+	XIAOLIN = 0,
+	BRESENHAM
+};
 
 typedef struct s_color_rgba
 {
@@ -87,7 +95,9 @@ typedef struct s_camera
 	int	y_angle;
 	int	z_angle;
 	int	z_factor;
-	int	scale;
+	int	scale_width;
+	int	scale_height;
+	int	line_tracer;
 }	t_camera;
 
 typedef struct s_map
@@ -124,6 +134,7 @@ int		validate_map(char *file_string);
 void	parse_map(t_map *map, char *file_string);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
+void	transform_line(t_fdf *fdf_data, t_line *line);
 
 
 // Utils
