@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:07:50 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/19 18:56:33 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:15:35 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	rotate_z(t_fdf *fdf_data, t_line *line)
 
 void	transform_line(t_fdf *fdf_data, t_line *line)
 {
-	rotate_in_x(fdf_data, line);
-	rotate_in_y(fdf_data, line);
-	rotate_in_z(fdf_data, line);
-	move(fdf_data, line);
+	rotate_x(fdf_data, line);
+	rotate_y(fdf_data, line);
+	rotate_z(fdf_data, line);
+	// move(fdf_data, line);
 }

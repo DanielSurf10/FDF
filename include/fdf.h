@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/19 18:36:42 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:16:05 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ typedef struct s_fdf
 // 	int	key_line : 1;	// Botão para mudar o algoritmo de fazer a linha
 // } t_keys;
 
-void	draw_line(void *img, t_point *point_0, t_point *point_1);
-void	print_big_pixel(void *img, int x, int y, uint32_t color);
+// void	draw_line(void *img, t_point *point_0, t_point *point_1);
+// void	print_big_pixel(void *img, int x, int y, uint32_t color);
 
 
 // Functions
