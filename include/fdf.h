@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/21 20:16:05 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:00:35 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "MLX42.h"
 # include "libft.h"
 
-# define WIDTH 1024
-# define HEIGHT 1024
+# define WIDTH 1280
+# define HEIGHT 720
 
 # define NUMBER_IMAGES 3
 # define BUFFER_SIZE 50

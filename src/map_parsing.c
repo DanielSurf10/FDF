@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:12 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/18 14:47:04 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:38:36 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static void	inicializate_map(t_map *map, char *file_string)
 		{
 			to_place_in_map.x = aux.x - (map->width / 2);
 			to_place_in_map.y = aux.y - (map->height / 2);
+			// to_place_in_map.x = aux.x;
+			// to_place_in_map.y = aux.y;
 			to_place_in_map.z = ft_atoi(split_rows[aux.x]);
 			to_place_in_map.color.color_int = get_color(split_rows[aux.x]);
 			set_node_map(map, to_place_in_map, aux.x, aux.y);

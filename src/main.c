@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/19 18:02:59 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:57:55 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ int	main(int argv, char *argc[])
 
 	// Colocar os hooks
 
+	// Crias as imagens
+	fdf_data.images[RENDER] = mlx_new_image(fdf_data.mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(fdf_data.mlx, fdf_data.images[RENDER], 0, 0);
+
 	// mlx_key_hook(fdf_data.mlx, key_hook, &fdf_data);
 	mlx_loop_hook(fdf_data.mlx, frame, &fdf_data);
 
-
 	// mlx_loop
-
 	mlx_loop(fdf_data.mlx);
 
-
 	// Apagar tudo, destruir as imagens e fechar a janela
-
 	mlx_terminate(fdf_data.mlx);
 	// delete_images(fdf_data.images);
 
