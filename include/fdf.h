@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/22 18:00:35 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:26:40 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ typedef struct s_line
 
 typedef struct s_camera
 {
-	int	x_offset;
-	int	y_offset;
-	int	x_angle;
-	int	y_angle;
-	int	z_angle;
-	int	z_factor;
-	int	scale_width;
-	int	scale_height;
-	int	line_tracer;
+	int		x_offset;
+	int		y_offset;
+	double	x_angle;
+	double	y_angle;
+	double	z_angle;
+	double	z_factor;
+	int		scale_width;
+	int		scale_height;
+	int		line_tracer;
 }	t_camera;
 
 typedef struct s_map
@@ -135,6 +135,7 @@ void	parse_map(t_map *map, char *file_string);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
 void	transform_line(t_fdf *fdf_data, t_line *line);
+t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta);
 
 
 // Utils

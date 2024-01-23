@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:47:30 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/22 19:00:30 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:30:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	put_pixel(mlx_image_t *img, t_point point)
 
 static void	draw_line(mlx_image_t *img, t_line line)
 {
-	// put_pixel(img, line.point_1);
-	// put_pixel(img, line.point_2);
 	int	dx;
 	int	dy;
 	int	sx;
@@ -41,7 +39,10 @@ static void	draw_line(mlx_image_t *img, t_line line)
 	int	x1 = line.point_2.x;
 	int	y1 = line.point_2.y;
 	t_point	aux;
+	t_point	delta;
 
+	delta.x = abs(line.point_2.x - line.point_1.x);
+	delta.y = abs(line.point_2.y - line.point_1.y);
 	dx = abs(x1 - x0);
 	dy = -abs(y1 - y0);
 	sx = ternary(x0 < x1, 1, -1);
@@ -51,7 +52,9 @@ static void	draw_line(mlx_image_t *img, t_line line)
 	{
 		aux.x = x0;
 		aux.y = y0;
-		aux.color.color_int = line.point_1.color.color_int;
+		aux.color = get_color_gradient(aux, line.point_1, line.point_2, delta);
+		aux.color.color_struct.a = -1;
+
 		put_pixel(img, aux);
 		if (x0 == x1 && y0 == y1)
 			break ;
