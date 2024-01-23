@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:42:02 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 00:15:04 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:42:29 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	manag_keys(t_fdf *fdf_data)
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_S))
 		fdf_data->camera.x_angle -= 1;
 
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_E))
 		fdf_data->camera.y_angle += 1;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_Q))
 		fdf_data->camera.y_angle -= 1;
 
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_E))
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_D))
 		fdf_data->camera.z_angle += 1;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_A))
 		fdf_data->camera.z_angle -= 1;
 
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_UP))

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 00:26:40 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:16:34 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	parse_map(t_map *map, char *file_string);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
 void	transform_line(t_fdf *fdf_data, t_line *line);
+void	transform_point(t_fdf *fdf_data, t_point *point);
 t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta);
 
 

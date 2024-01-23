@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:21:00 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 00:27:02 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:46:48 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point 
 	color.color_struct.r = get_light(start.color.color_struct.r, end.color.color_struct.r, percentage);
 	color.color_struct.g = get_light(start.color.color_struct.g, end.color.color_struct.g, percentage);
 	color.color_struct.b = get_light(start.color.color_struct.b, end.color.color_struct.b, percentage);
-	color.color_struct.a = get_light(start.color.color_struct.b, end.color.color_struct.b, percentage);
+	// color.color_struct.a = -1;
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:47:30 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 00:30:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:51:38 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,32 @@ static void	draw_line(mlx_image_t *img, t_line line)
 void	render(t_fdf *fdf_data)
 {
 	t_point	aux;
+	t_point	tmp_point_row;
 	t_line	line;
 
 	aux.y = 0;
 	while (aux.y < fdf_data->map.height)
 	{
+		tmp_point_row = get_node_map(&(fdf_data->map), 0, aux.y);
+		transform_point(fdf_data, &(tmp_point_row));
 		aux.x = 0;
 		while (aux.x < fdf_data->map.width)
 		{
+			// line.point_1 = tmp_point_row;				// Esse negocio tá bugado
+			// if ((aux.x + 1) < fdf_data->map.width)
+			// {
+			// 	line.point_2 = get_node_map(&(fdf_data->map), aux.x + 1, aux.y);
+			// 	transform_point(fdf_data, &(line.point_2));
+			// 	tmp_point_row = line.point_2;
+			// 	draw_line(fdf_data->images[RENDER], line);
+			// }
+			// if ((aux.y + 1) < fdf_data->map.height)
+			// {
+			// 	line.point_2 = get_node_map(&(fdf_data->map), aux.x, aux.y + 1);
+			// 	transform_point(fdf_data, &(line.point_2));
+			// 	draw_line(fdf_data->images[RENDER], line);
+			// }
+
 			if ((aux.x + 1) < fdf_data->map.width)
 			{
 				line.point_1 = get_node_map(&(fdf_data->map), aux.x, aux.y);
