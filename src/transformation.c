@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:07:50 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 14:33:03 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:03:06 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	rotate_z(t_fdf *fdf_data, t_point *point)
 
 void	move(t_fdf *fdf_data, t_point *point)
 {
-	point->x += WIDTH / 2;
-	point->y += HEIGHT / 2;
+	point->x += fdf_data->camera.x_offset;
+	point->y += fdf_data->camera.y_offset;
 }
 
 void	transform_line(t_fdf *fdf_data, t_line *line)

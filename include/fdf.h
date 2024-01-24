@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 14:30:51 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:06:22 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,8 @@
 # define HEIGHT 720
 
 # define NUMBER_IMAGES 3
-# define BUFFER_SIZE 50
+# define BUFFER_SIZE 4096
 # define PI 3.14159
-
-// # define ERROR_INVALID_ARGUMENTS_MSG "Wrong usage. \
-// Expected './fdf <file_path>'."
-//
-// # define ERROR_FILE_MSG "File error. \
-// Invalid File."
 
 enum e_errors
 {
@@ -75,10 +69,10 @@ typedef union u_color
 
 typedef struct s_point
 {
-	int			x;
-	int			y;
-	int			z;
-	t_color		color;
+	int		x;
+	int		y;
+	int		z;
+	t_color	color;
 }	t_point;
 
 typedef struct s_line
@@ -105,7 +99,7 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
-	int		max_z;				// Não sei se isso é necessário
+	int		max_z;
 	t_point	*map;
 }	t_map;
 
@@ -117,16 +111,6 @@ typedef struct s_fdf
 	t_map		map;
 }	t_fdf;
 
-// typedef struct s_keys
-// {
-// 	int	key_p : 1;		// Botão de mudar a perspectiva
-// 	int	key_line : 1;	// Botão para mudar o algoritmo de fazer a linha
-// } t_keys;
-
-// void	draw_line(void *img, t_point *point_0, t_point *point_1);
-// void	print_big_pixel(void *img, int x, int y, uint32_t color);
-
-
 // Functions
 // Main
 
@@ -135,12 +119,13 @@ int		validate_map(char *file_string);
 void	parse_map(t_map *map, char *file_string);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
+void	key_hook(mlx_key_data_t keydata, void* param);
+void	manag_keys(t_fdf *fdf_data);
 void	transform_line(t_fdf *fdf_data, t_line *line);
 void	transform_point(t_fdf *fdf_data, t_point *point);
 t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta);
 void	bresenham_algorithm(mlx_image_t *img, t_line line);
 void	xiaolin_algorithm(mlx_image_t *img, t_line line);
-
 
 // Utils
 
@@ -151,8 +136,6 @@ void	set_node_map(t_map *map, t_point point, int x, int y);
 // char	*ft_read_all(int fd);
 int		ternary(int condition, int if_true, int if_false);
 void	put_pixel(mlx_image_t *img, t_point point);
-
-
-
+int		get_max_z_value(t_map map);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/27 15:54:27 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/15 15:19:35 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/01/24 16:16:12 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ HEADERS	:= -I ./include \
 LIBS	:= $(LIBMLX)/build/libmlx42.a \
 			${LIBFT}/libft.a \
 			-ldl -lglfw -pthread -lm
-			
+
 SRCS	:= $(shell find src -iname "*.c")
 OBJS	:= ${SRCS:src/%.c=obj/%.o}
 

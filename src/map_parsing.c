@@ -6,57 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:13:12 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 14:45:00 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:40:38 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// static void	get_z_and_color(t_map *map, char *file_string, t_point point,
-// 			t_point *to_place_in_map)
-// {
-// 	int		i;
-// 	int		line;
-// 	int		row;
-// 	char	*current_line;
-//
-// 	i = 0;
-// 	line = 0;
-// 	row = 0;
-// 	current_line = file_string;
-// 	while (line++ < point.y)
-// 		current_line = ft_strchr(current_line, '\n') + 1;
-// 	while (row++ < point.x)
-// 	{
-// 		// while (current_line[i] == ' ')
-// 		// 	i++;
-// 		while (current_line[i] != ' ')
-// 			i++;
-// 		while (current_line[i] == ' ')
-// 			i++;
-// 	}
-// 	ft_atoi_z_and_color(current_line + i, to_place_in_map);
-// 	// printf("i antigo: %d\n", i);
-// 	// printf("%s\n", current_line + i);
-// 	// while (ft_isdigit(current_line[i]))
-// 	// {
-// 	// 	printf("|%c|\n", current_line[i]);
-// 	// 	i++;
-// 	// }
-//
-// 	// printf("res strncmp: %d\ni: %i\n", ft_strncmp(current_line + i, ",0x", 3), i);
-// 	// if (current_line[i] && ft_strncmp(current_line + i, ",0x", 3) == 0)
-// 	// 	i += 3;
-// // 	if (current_line[i] == ',')
-// // 		i += 3;
-// //
-// // 	to_place_in_map->color.color_int = ft_atoi_hex(current_line + i) << 8;
-// //
-// // 	printf("i dps: %i\n", i);
-// // 	printf("%s\n", current_line + i);
-// // 	printf("%i\n", to_place_in_map->color.color_int);
-// // 	puts("------------------------");
-// }
 
 static int	get_color(char *str)
 {
@@ -87,14 +41,8 @@ static void	inicializate_map(t_map *map, char *file_string)
 		{
 			to_place_in_map.x = aux.x - (map->width / 2);
 			to_place_in_map.y = aux.y - (map->height / 2);
-			// to_place_in_map.x = aux.x;
-			// to_place_in_map.y = aux.y;
 			to_place_in_map.z = ft_atoi(split_rows[aux.x]);
 			to_place_in_map.color.color_int = get_color(split_rows[aux.x]);
-
-			// if (to_place_in_map.color.color_int == -1)
-			// 	to_place_in_map.color.color_struct.a = 1;
-
 			set_node_map(map, to_place_in_map, aux.x, aux.y);
 			aux.x += 1;
 		}
