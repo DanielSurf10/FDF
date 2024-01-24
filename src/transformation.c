@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:07:50 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 15:13:43 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:33:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	scale(t_fdf *fdf_data, t_point *point)
 {
-	point->x *= fdf_data->camera.scale_width * 0.9;
-	point->y *= fdf_data->camera.scale_height * 0.9;
+	point->x *= fdf_data->camera.scale_width * fdf_data->camera.scale * 0.9;
+	point->y *= fdf_data->camera.scale_height * fdf_data->camera.scale * 0.9;
+	point->z *= fdf_data->camera.z_factor * fdf_data->camera.scale;
 }
 
 void	rotate_x(t_fdf *fdf_data, t_point *point)
@@ -74,8 +75,8 @@ void	transform_line(t_fdf *fdf_data, t_line *line)
 void	transform_point(t_fdf *fdf_data, t_point *point)
 {
 	scale(fdf_data, point);
+	rotate_z(fdf_data, point);
 	rotate_x(fdf_data, point);
 	rotate_y(fdf_data, point);
-	rotate_z(fdf_data, point);
 	move(fdf_data, point);
 }

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 15:46:15 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:28:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argv, char *argc[])
 	fdf_data.camera.x_offset = 0;
 	fdf_data.camera.y_offset = 0;
 	fdf_data.camera.z_factor = 1;		// É 1 pq é 100% do z
+	fdf_data.camera.scale = 1;
 	fdf_data.camera.scale_width = WIDTH / fdf_data.map.width;
 	fdf_data.camera.scale_height = HEIGHT / fdf_data.map.height;
 	fdf_data.camera.line_tracer = XIAOLIN;

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:35 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/17 16:43:32 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:05:45 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,15 @@ void	set_node_map(t_map *map, t_point point, int x, int y)
 	map->map[x + y * map->width] = point;
 }
 
-// char	*ft_read_all(int fd)
-// {
-// 	int		chars_readed;
-// 	char	*temp_buffer;
-// 	char	*file_string;
-// 	char	*aux;
-//
-// 	chars_readed = 1;
-// 	temp_buffer = (char *) malloc((BUFFER_SIZE + 1));
-// 	file_string = ft_strdup("");
-// 	while (chars_readed > 0)
-// 	{
-// 		chars_readed = read(fd, temp_buffer, BUFFER_SIZE);
-// 		temp_buffer[chars_readed] = '\0';
-// 		aux = file_string;
-// 		file_string = ft_strjoin(file_string, temp_buffer);
-// 		free(aux);
-// 	}
-// 	free(temp_buffer);
-// 	return (file_string);
-// }
+int	ternary(int condition, int if_true, int if_false)
+{
+	if (condition)
+		return (if_true);
+	return (if_false);
+}
+
+void	put_pixel(mlx_image_t *img, t_point point)
+{
+	if (point.x >= 0 && point.x < WIDTH && point.y >= 0 && point.y < HEIGHT)
+		mlx_put_pixel(img, point.x, point.y, point.color.color_int);
+}

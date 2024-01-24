@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:42:02 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 15:42:29 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:35:51 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,20 @@ static void	manag_keys(t_fdf *fdf_data)
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_DOWN))
 		fdf_data->camera.z_factor -= 0.2;
 
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_EQUAL))
+		fdf_data->camera.scale += 0.05;
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_MINUS) && fdf_data->camera.scale > 0)
+		fdf_data->camera.scale -= 0.05;
 
-	// O botão ESQ vai ficar em outro lugar
+
+	// Esses vão ficar em outro lugar
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fdf_data->mlx);
+
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_0))
+		fdf_data->camera.line_tracer = BRESENHAM;
+	else if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_9))
+		fdf_data->camera.line_tracer = XIAOLIN;
 
 	// Aqui irá ver se tem algum botão apertado e fazer alguma coisa
 }

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 15:16:34 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:30:51 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_camera
 	double	y_angle;
 	double	z_angle;
 	double	z_factor;
+	double	scale;
 	int		scale_width;
 	int		scale_height;
 	int		line_tracer;
@@ -110,7 +111,7 @@ typedef struct s_map
 
 typedef struct s_fdf
 {
-	void		*mlx;
+	mlx_t		*mlx;
 	mlx_image_t	*images[NUMBER_IMAGES];
 	t_camera	camera;
 	t_map		map;
@@ -137,6 +138,8 @@ void	render(t_fdf *fdf_data);
 void	transform_line(t_fdf *fdf_data, t_line *line);
 void	transform_point(t_fdf *fdf_data, t_point *point);
 t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta);
+void	bresenham_algorithm(mlx_image_t *img, t_line line);
+void	xiaolin_algorithm(mlx_image_t *img, t_line line);
 
 
 // Utils
@@ -146,6 +149,9 @@ int		get_width(char *str);
 t_point	get_node_map(t_map *map, int x, int y);
 void	set_node_map(t_map *map, t_point point, int x, int y);
 // char	*ft_read_all(int fd);
+int		ternary(int condition, int if_true, int if_false);
+void	put_pixel(mlx_image_t *img, t_point point);
+
 
 
 
