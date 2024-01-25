@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 16:35:38 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:01:05 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define PI 3.14159
 # define NUMBER_IMAGES 3
-# define BUFFER_SIZE 4096000
+# define BUFFER_SIZE 4096
 # define BACKGROUND_COLOR 0x89ABE3FF
 # define BACKGROUND_STRING_COLOR 0xEA738DD0
 

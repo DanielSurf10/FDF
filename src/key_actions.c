@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 19:50:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 16:37:17 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:58:43 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ static void	rotation_keys(t_fdf *fdf_data)
 
 static void	scale_keys(t_fdf *fdf_data)
 {
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_UP)
+		&& fdf_data->camera.z_factor
+		< ternary(fdf_data->map.max_z < 100, 20, 5))
 		fdf_data->camera.z_factor += 0.2;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_DOWN)
+		&& fdf_data->camera.z_factor
+		> ternary(fdf_data->map.max_z < 100, -20, -5))
 		fdf_data->camera.z_factor -= 0.2;
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_EQUAL))
 		fdf_data->camera.scale += 0.01;
@@ -61,6 +65,7 @@ void	manag_keys(t_fdf *fdf_data)
 	rotation_keys(fdf_data);
 	scale_keys(fdf_data);
 	move_keys(fdf_data);
+	printf("%f\n", fdf_data->camera.z_factor);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
