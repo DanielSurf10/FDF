@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 19:50:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 19:58:27 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:08:09 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static void	rotation_keys(t_fdf *fdf_data)
 {
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_W))
-		fdf_data->camera.x_angle += 1;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_S))
-		fdf_data->camera.x_angle -= 1;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_E))
-		fdf_data->camera.y_angle += 1;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_Q))
-		fdf_data->camera.y_angle -= 1;
+	if (fdf_data->camera.projection != TOP_DOWN)
+	{
+		if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_W))
+			fdf_data->camera.x_angle += 1;
+		if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_S))
+			fdf_data->camera.x_angle -= 1;
+		if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_E))
+			fdf_data->camera.y_angle += 1;
+		if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_Q))
+			fdf_data->camera.y_angle -= 1;
+	}
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_D))
 		fdf_data->camera.z_angle += 1;
 	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_A))
@@ -70,11 +73,19 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 			mlx_close_window(fdf_data->mlx);
 		if (keydata.key == MLX_KEY_0)
+			fdf_data->camera.line_tracer = ternary(
+					fdf_data->camera.line_tracer, XIAOLIN, BRESENHAM);
+		if (keydata.key == MLX_KEY_R || keydata.key == MLX_KEY_F1
+			|| keydata.key == MLX_KEY_F2)
 		{
-			if (fdf_data->camera.line_tracer == BRESENHAM)
-				fdf_data->camera.line_tracer = XIAOLIN;
-			else
-				fdf_data->camera.line_tracer = BRESENHAM;
+			init_fdf(fdf_data);
+			if (keydata.key == MLX_KEY_F2)
+			{
+				fdf_data->camera.x_angle = 0;
+				fdf_data->camera.y_angle = 0;
+				fdf_data->camera.z_angle = 0;
+				fdf_data->camera.projection = TOP_DOWN;
+			}
 		}
 	}
 }

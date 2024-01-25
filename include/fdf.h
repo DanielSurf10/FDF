@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 20:06:22 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:08:24 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ enum e_line_tracer
 	BRESENHAM
 };
 
+enum e_projection
+{
+	ISOMETRIC = 0,
+	TOP_DOWN,
+	THREE_VIEWS
+};
+
 typedef struct s_color_rgba
 {
 	int	r:8;
@@ -93,6 +100,7 @@ typedef struct s_camera
 	int		scale_width;
 	int		scale_height;
 	int		line_tracer;
+	int		projection;
 }	t_camera;
 
 typedef struct s_map
@@ -117,6 +125,7 @@ typedef struct s_fdf
 int		create_map(t_fdf *fdf_data, char *file_path);
 int		validate_map(char *file_string);
 void	parse_map(t_map *map, char *file_string);
+void	init_fdf(t_fdf *fdf_data);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
 void	key_hook(mlx_key_data_t keydata, void* param);

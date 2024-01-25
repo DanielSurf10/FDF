@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 20:21:10 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:06:11 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void print_error(int error)
 	exit(EXIT_FAILURE);
 }
 
-static void	init_fdf(t_fdf *fdf_data)
+void	init_fdf(t_fdf *fdf_data)
 {
 	fdf_data->camera.x_angle = 60;
 	fdf_data->camera.y_angle = 0;
@@ -30,13 +30,16 @@ static void	init_fdf(t_fdf *fdf_data)
 	fdf_data->camera.y_offset = HEIGHT / 2;
 	fdf_data->map.max_z = get_max_z_value(fdf_data->map);
 	if (fdf_data->map.max_z < 100 && fdf_data->map.max_z != 0)
-		fdf_data->camera.z_factor = (100 / fdf_data->map.max_z);
+		fdf_data->camera.z_factor = (100.0 / fdf_data->map.max_z);
+	else if (fdf_data->map.max_z > 200)
+		fdf_data->camera.z_factor = (200.0 / fdf_data->map.max_z);
 	else
 		fdf_data->camera.z_factor = 1;
 	fdf_data->camera.scale = 1;
 	fdf_data->camera.scale_width = WIDTH / fdf_data->map.width;
 	fdf_data->camera.scale_height = HEIGHT / fdf_data->map.height;
 	fdf_data->camera.line_tracer = XIAOLIN;
+	fdf_data->camera.projection = ISOMETRIC;
 }
 
 int	main(int argv, char *argc[])
