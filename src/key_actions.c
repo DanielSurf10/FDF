@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 19:50:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 16:58:43 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:15:05 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	manag_keys(t_fdf *fdf_data)
 	rotation_keys(fdf_data);
 	scale_keys(fdf_data);
 	move_keys(fdf_data);
-	printf("%f\n", fdf_data->camera.z_factor);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

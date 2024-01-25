@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 16:16:05 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:00:41 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_fdf(t_fdf *fdf_data)
 	fdf_data->camera.scale = 0.7;
 	fdf_data->camera.scale_width = WIDTH / fdf_data->map.width;
 	fdf_data->camera.scale_height = HEIGHT / fdf_data->map.height;
-	fdf_data->camera.line_tracer = BRESENHAM;
+	fdf_data->camera.line_tracer = XIAOLIN;
 	fdf_data->camera.projection = ISOMETRIC;
 }
 
