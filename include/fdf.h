@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 13:08:24 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:44:40 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define NUMBER_IMAGES 3
 # define BUFFER_SIZE 4096
 # define PI 3.14159
+# define BACKGROUND_COLOR 0x89ABE3FF
+# define BACKGROUND_STRING_COLOR 0xEA738DFF
 
 enum e_errors
 {
@@ -135,6 +137,8 @@ void	transform_point(t_fdf *fdf_data, t_point *point);
 t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta);
 void	bresenham_algorithm(mlx_image_t *img, t_line line);
 void	xiaolin_algorithm(mlx_image_t *img, t_line line);
+void	create_images(t_fdf *fdf_data);
+
 
 // Utils
 
