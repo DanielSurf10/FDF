@@ -1,64 +1,74 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham_algorithm.c                              :+:      :+:    :+:   */
+/*   line_bresenham.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:54:56 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 12:55:57 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:30:48 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static t_bresenham	inicializate(t_line line)
+{
+	t_bresenham	variables;
+
+	variables.line = line;
+	variables.original_line = line;
+	variables.delta.x = abs(line.point_2.x - line.point_1.x);
+	variables.delta.y = abs(line.point_2.y - line.point_1.y);
+	variables.delta_x = abs(variables.line.point_2.x
+			- variables.line.point_1.x);
+	variables.delta_y = -abs(variables.line.point_2.y
+			- variables.line.point_1.y);
+	variables.slope_x = ternary(variables.line.point_1.x
+			< variables.line.point_2.x, 1, -1);
+	variables.slope_y = ternary(variables.line.point_1.y
+			< variables.line.point_2.y, 1, -1);
+	variables.error_1 = variables.delta_x + variables.delta_y;
+	return (variables);
+}
+
+static t_point	get_point(t_bresenham variables)
+{
+	t_point	point;
+
+	point.x = variables.line.point_1.x;
+	point.y = variables.line.point_1.y;
+	point.color = color_gradient(variables.line.point_1,
+			variables.original_line.point_1, variables.original_line.point_2,
+			variables.delta);
+	return (point);
+}
+
 void	bresenham_algorithm(mlx_image_t *img, t_line line)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
-	int	e2;
+	t_bresenham	variables;
 
-	int	x0 = line.point_1.x;
-	int	y0 = line.point_1.y;
-	int	x1 = line.point_2.x;
-	int	y1 = line.point_2.y;
-	t_point	point_to_plot;
-	t_point	delta;
-
-	delta.x = abs(line.point_2.x - line.point_1.x);
-	delta.y = abs(line.point_2.y - line.point_1.y);
-	dx = abs(x1 - x0);
-	dy = -abs(y1 - y0);
-	sx = ternary(x0 < x1, 1, -1);
-	sy = ternary(y0 < y1, 1, -1);
-	error = dx + dy;
+	variables = inicializate(line);
 	while (1)
 	{
-		point_to_plot.x = x0;
-		point_to_plot.y = y0;
-		point_to_plot.color = get_color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color.color_struct.a = -1;
-
-		put_pixel(img, point_to_plot);
-		if (x0 == x1 && y0 == y1)
+		put_pixel(img, get_point(variables));
+		if (variables.line.point_1.x == variables.line.point_2.x
+			&& variables.line.point_1.y == variables.line.point_2.y)
 			break ;
-		e2 = 2 * error;
-		if (e2 >= dy)
+		variables.error_2 = 2 * variables.error_1;
+		if (variables.error_2 >= variables.delta_y)
 		{
-			if (x0 == x1)
+			if (variables.line.point_1.x == variables.line.point_2.x)
 				break ;
-			error += dy;
-			x0 += sx;
+			variables.error_1 += variables.delta_y;
+			variables.line.point_1.x += variables.slope_x;
 		}
-		if (e2 <= dx)
+		if (variables.error_2 <= variables.delta_x)
 		{
-			if (y0 == y1)
+			if (variables.line.point_1.y == variables.line.point_2.y)
 				break ;
-			error += dx;
-			y0 += sy;
+			variables.error_1 += variables.delta_x;
+			variables.line.point_1.y += variables.slope_y;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 14:44:40 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:35:38 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
-# define NUMBER_IMAGES 3
-# define BUFFER_SIZE 4096
 # define PI 3.14159
+# define NUMBER_IMAGES 3
+# define BUFFER_SIZE 4096000
 # define BACKGROUND_COLOR 0x89ABE3FF
-# define BACKGROUND_STRING_COLOR 0xEA738DFF
+# define BACKGROUND_STRING_COLOR 0xEA738DD0
 
 enum e_errors
 {
@@ -78,10 +78,10 @@ typedef union u_color
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
-	int		z;
-	t_color	color;
+	int	x;
+	int	y;
+	int	z;
+	int	color;
 }	t_point;
 
 typedef struct s_line
@@ -89,6 +89,19 @@ typedef struct s_line
 	t_point	point_1;
 	t_point	point_2;
 }	t_line;
+
+typedef struct s_bresenham
+{
+	int		delta_x;
+	int		delta_y;
+	int		slope_x;
+	int		slope_y;
+	int		error_1;
+	int		error_2;
+	t_point	delta;
+	t_line	line;
+	t_line	original_line;
+}	t_bresenham;
 
 typedef struct s_camera
 {
@@ -134,7 +147,7 @@ void	key_hook(mlx_key_data_t keydata, void* param);
 void	manag_keys(t_fdf *fdf_data);
 void	transform_line(t_fdf *fdf_data, t_line *line);
 void	transform_point(t_fdf *fdf_data, t_point *point);
-t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta);
+int		color_gradient(t_point current, t_point start, t_point end, t_point delta);
 void	bresenham_algorithm(mlx_image_t *img, t_line line);
 void	xiaolin_algorithm(mlx_image_t *img, t_line line);
 void	create_images(t_fdf *fdf_data);

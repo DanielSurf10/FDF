@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:11:32 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 14:47:38 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:10:20 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_background(t_fdf *fdf_data)
 	t_point	i;
 
 	i.x = -1;
-	i.color.color_int = BACKGROUND_COLOR;
+	i.color = BACKGROUND_COLOR;
 	while (++i.x < WIDTH)
 	{
 		i.y = -1;
@@ -57,7 +57,7 @@ static void	set_background(t_fdf *fdf_data)
 			put_pixel(fdf_data->images[BACKGROUND], i);
 	}
 	i.x = -1;
-	i.color.color_int = BACKGROUND_STRING_COLOR;
+	i.color = BACKGROUND_STRING_COLOR;
 	while (++i.x < WIDTH / 5)
 	{
 		i.y = -1;

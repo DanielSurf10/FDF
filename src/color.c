@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 23:21:00 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/23 14:46:48 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:33:05 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,26 @@ static int	get_light(int start, int end, double percent)
 	return ((int)((1 - percent) * start + percent * end));
 }
 
-t_color	get_color_gradient(t_point current, t_point start, t_point end, t_point delta)
+int	color_gradient(t_point current, t_point start, t_point end, t_point delta)
 {
-	int		r;
-	int		g;
-	int		b;
+	int		red;
+	int		green;
+	int		blue;
+	int		alpha;
 	double	percentage;
-	t_color	color;
 
-	if (current.color.color_int == end.color.color_int)
+	if (current.color == end.color)
 		return (current.color);
 	if (delta.x > delta.y)
 		percentage = percent(start.x, end.x, current.x);
 	else
 		percentage = percent(start.y, end.y, current.y);
-	color.color_struct.r = get_light(start.color.color_struct.r, end.color.color_struct.r, percentage);
-	color.color_struct.g = get_light(start.color.color_struct.g, end.color.color_struct.g, percentage);
-	color.color_struct.b = get_light(start.color.color_struct.b, end.color.color_struct.b, percentage);
-	// color.color_struct.a = -1;
-	return (color);
+	red = get_light((start.color >> 24) & 0xFF, (end.color >> 24) & 0xFF,
+			percentage);
+	green = get_light((start.color >> 16) & 0xFF, (end.color >> 16) & 0xFF,
+			percentage);
+	blue = get_light((start.color >> 8) & 0xFF, (end.color >> 8) & 0xFF,
+			percentage);
+	alpha = get_light(start.color & 0xFF, end.color & 0xFF, percentage);
+	return ((red << 24) | (green << 16) | (blue << 8) | alpha);
 }

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:07:19 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 13:18:55 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:16:22 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 	int		x2 = line.point_2.x;
 	int		y1 = line.point_1.y;
 	int		y2 = line.point_2.y;
-	int		color = line.point_1.color.color_int;
+	int		color = line.point_1.color;
 	t_point	point_to_plot;
 
 	double dx = (double)x2 - (double)x1;
@@ -52,12 +52,12 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 
 		point_to_plot.x = xpxl1;
 		point_to_plot.y = ypxl1;
-		point_to_plot.color.color_int = set_brightness(color, rfpart_(yend)*xgap);
+		point_to_plot.color = set_brightness(color, rfpart_(yend)*xgap);
 		put_pixel(img, point_to_plot);
 
 		point_to_plot.x = xpxl1;
 		point_to_plot.y = ypxl1 + 1;
-		point_to_plot.color.color_int = set_brightness(color, fpart_(yend)*xgap);
+		point_to_plot.color = set_brightness(color, fpart_(yend)*xgap);
 		put_pixel(img, point_to_plot);
 		double intery = yend + gradient;
 
@@ -69,12 +69,12 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 
 		point_to_plot.x = xpxl2;
 		point_to_plot.y = ypxl2;
-		point_to_plot.color.color_int = set_brightness(color, rfpart_(yend) * xgap);
+		point_to_plot.color = set_brightness(color, rfpart_(yend) * xgap);
 		put_pixel(img, point_to_plot);
 
 		point_to_plot.x = xpxl2;
 		point_to_plot.y = ypxl2 + 1;
-		point_to_plot.color.color_int = set_brightness(color, fpart_(yend) * xgap);
+		point_to_plot.color = set_brightness(color, fpart_(yend) * xgap);
 		put_pixel(img, point_to_plot);
 
 		int x;
@@ -82,12 +82,12 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 
 			point_to_plot.x = x;
 			point_to_plot.y = ipart_(intery);
-			point_to_plot.color.color_int = set_brightness(color, rfpart_(intery));
+			point_to_plot.color = set_brightness(color, rfpart_(intery));
 			put_pixel(img, point_to_plot);
 
 			point_to_plot.x = x;
 			point_to_plot.y = ipart_(intery) + 1;
-			point_to_plot.color.color_int = set_brightness(color, fpart_(intery));
+			point_to_plot.color = set_brightness(color, fpart_(intery));
 			put_pixel(img, point_to_plot);
 			intery += gradient;
 		}
@@ -105,12 +105,12 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 
 		point_to_plot.x = xpxl1;
 		point_to_plot.y = ypxl1;
-		point_to_plot.color.color_int = set_brightness(color, rfpart_(xend)*ygap);
+		point_to_plot.color = set_brightness(color, rfpart_(xend)*ygap);
 		put_pixel(img, point_to_plot);
 
 		point_to_plot.x = xpxl1 + 1;
 		point_to_plot.y = ypxl1;
-		point_to_plot.color.color_int = set_brightness(color, fpart_(xend)*ygap);
+		point_to_plot.color = set_brightness(color, fpart_(xend)*ygap);
 		put_pixel(img, point_to_plot);
 		double interx = xend + gradient;
 
@@ -122,12 +122,12 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 
 		point_to_plot.x = xpxl2;
 		point_to_plot.y = ypxl2;
-		point_to_plot.color.color_int = set_brightness(color, rfpart_(xend) * ygap);
+		point_to_plot.color = set_brightness(color, rfpart_(xend) * ygap);
 		put_pixel(img, point_to_plot);
 
 		point_to_plot.x = xpxl2 + 1;
 		point_to_plot.y = ypxl2;
-		point_to_plot.color.color_int = set_brightness(color, fpart_(xend) * ygap);
+		point_to_plot.color = set_brightness(color, fpart_(xend) * ygap);
 		put_pixel(img, point_to_plot);
 
 		int y;
@@ -135,12 +135,12 @@ void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 
 			point_to_plot.x = ipart_(interx);
 			point_to_plot.y = y;
-			point_to_plot.color.color_int = set_brightness(color, rfpart_(interx));
+			point_to_plot.color = set_brightness(color, rfpart_(interx));
 			put_pixel(img, point_to_plot);
 
 			point_to_plot.x = ipart_(interx) + 1;
 			point_to_plot.y = y;
-			point_to_plot.color.color_int = set_brightness(color, fpart_(interx));
+			point_to_plot.color = set_brightness(color, fpart_(interx));
 			put_pixel(img, point_to_plot);
 			interx += gradient;
 		}
