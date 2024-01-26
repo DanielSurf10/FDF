@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 18:29:56 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:39:47 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define PI 3.14159
 # define NUMBER_IMAGES 3
 # define BUFFER_SIZE 4096
-# define BACKGROUND_COLOR 0x89ABE3FF
-# define BACKGROUND_STRING_COLOR 0xEA738DD0
+# define BACKGROUND_COLOR 0x89ABE3DB
+# define BACKGROUND_STRING_COLOR 0xEA738DA0
 
 enum e_errors
 {
@@ -62,19 +62,26 @@ enum e_projection
 	THREE_VIEWS
 };
 
-typedef struct s_color_rgba
+enum e_rotation_sense
 {
-	int	r:8;
-	int	g:8;
-	int	b:8;
-	int	a:8;
-}	t_color_rgba;
+	STOPED = 0,
+	CLOCKWISE,
+	COUNTERCLOCKWISE
+};
 
-typedef union u_color
-{
-	int				color_int;
-	t_color_rgba	color_struct;
-}	t_color;
+// typedef struct s_color_rgba
+// {
+// 	int	r:8;
+// 	int	g:8;
+// 	int	b:8;
+// 	int	a:8;
+// }	t_color_rgba;
+//
+// typedef union u_color
+// {
+// 	int				color_int;
+// 	t_color_rgba	color_struct;
+// }	t_color;
 
 typedef struct s_point
 {
@@ -116,6 +123,9 @@ typedef struct s_camera
 	int		scale_height;
 	int		line_tracer;
 	int		projection;
+	int		auto_rotate_x;
+	int		auto_rotate_y;
+	int		auto_rotate_z;
 }	t_camera;
 
 typedef struct s_map
