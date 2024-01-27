@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/26 19:39:47 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:31:35 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ typedef struct s_camera
 	double	z_angle;
 	double	z_factor;
 	double	scale;
-	int		scale_width;
-	int		scale_height;
+	double	scale_width;
+	double	scale_height;
 	int		line_tracer;
 	int		projection;
 	int		auto_rotate_x;

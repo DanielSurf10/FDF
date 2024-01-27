@@ -6,13 +6,13 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/26 19:39:25 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:10:31 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void print_error(int error)
+static void	print_error(int error)
 {
 	if (error == INVALID_ARGUMENTS_ERROR)
 		ft_putendl_fd("Wrong usage. Expected './fdf <file_path>'.", 1);
@@ -36,10 +36,10 @@ void	init_fdf(t_fdf *fdf_data)
 	else
 		fdf_data->camera.z_factor = 1;
 	fdf_data->camera.scale = 0.7;
-	// fdf_data->camera.scale_width = WIDTH / fdf_data->map.width;
-	// fdf_data->camera.scale_height = HEIGHT / fdf_data->map.height;
-	fdf_data->camera.scale_height = WIDTH / hypot((double)fdf_data->map.width, (double)fdf_data->map.height);
-	fdf_data->camera.scale_width = WIDTH / hypot((double)fdf_data->map.width, (double)fdf_data->map.height);
+	fdf_data->camera.scale_height = WIDTH / hypot((double) fdf_data->map.width,
+			(double) fdf_data->map.height);
+	fdf_data->camera.scale_width = WIDTH / hypot((double) fdf_data->map.width,
+			(double) fdf_data->map.height);
 	fdf_data->camera.line_tracer = XIAOLIN;
 	fdf_data->camera.projection = ISOMETRIC;
 	fdf_data->camera.auto_rotate_x = STOPED;
@@ -69,9 +69,6 @@ int	main(int argv, char *argc[])
 
 	// Criar as imagens
 	create_images(&fdf_data);
-	// put_images_in_window(&fdf_data);
-
-	printf("%d %d\n", fdf_data.map.width, fdf_data.map.height);
 
 	// Colocar os hooks
 	mlx_key_hook(fdf_data.mlx, key_hook, &fdf_data);
