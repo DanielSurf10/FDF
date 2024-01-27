@@ -6,43 +6,41 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 19:50:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/26 19:17:49 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:04:05 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	is_auto_on(t_fdf *fdf_data)
+static int	auto_off(t_fdf *fdf_data)
 {
-	return (fdf_data->camera.auto_rotate_x
+	return (!(fdf_data->camera.auto_rotate_x
 		|| fdf_data->camera.auto_rotate_y
-		|| fdf_data->camera.auto_rotate_z);
+		|| fdf_data->camera.auto_rotate_z));
 }
 
 static void	rotation_keys(t_fdf *fdf_data)
 {
 	if (fdf_data->camera.projection != TOP_DOWN)
 	{
-		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_W)
-			&& !is_auto_on(fdf_data))
+		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_W) && auto_off(fdf_data))
 			|| fdf_data->camera.auto_rotate_x == CLOCKWISE)
 			fdf_data->camera.x_angle += 1;
-		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_S)
-			&& !is_auto_on(fdf_data))
+		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_S) && auto_off(fdf_data))
 			|| fdf_data->camera.auto_rotate_x == COUNTERCLOCKWISE)
 			fdf_data->camera.x_angle -= 1;
-		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_E)
-			&& !is_auto_on(fdf_data))
-			|| fdf_data->camera.auto_rotate_y == COUNTERCLOCKWISE)
+		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_E) && auto_off(fdf_data))
+			|| fdf_data->camera.auto_rotate_y == CLOCKWISE)
 			fdf_data->camera.y_angle += 1;
-		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_Q)
-			&& !is_auto_on(fdf_data))
+		if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_Q) && auto_off(fdf_data))
 			|| fdf_data->camera.auto_rotate_y == COUNTERCLOCKWISE)
 			fdf_data->camera.y_angle -= 1;
 	}
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_D))
+	if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_D) && auto_off(fdf_data))
+			|| fdf_data->camera.auto_rotate_z == CLOCKWISE)
 		fdf_data->camera.z_angle += 1;
-	if (mlx_is_key_down(fdf_data->mlx, MLX_KEY_A))
+	if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_A) && auto_off(fdf_data))
+			|| fdf_data->camera.auto_rotate_z == COUNTERCLOCKWISE)
 		fdf_data->camera.z_angle -= 1;
 }
 
