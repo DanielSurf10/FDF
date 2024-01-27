@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 01:06:54 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:31:16 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,11 @@ void	frame(void *param);
 void	render(t_fdf *fdf_data);
 void	key_hook(mlx_key_data_t keydata, void* param);
 void	manag_keys(t_fdf *fdf_data);
-void	transform_line(t_fdf *fdf_data, t_line *line);
-void	transform_point(t_fdf *fdf_data, t_point *point);
+void	scale(t_fdf *fdf_data, t_point *point);
+void	rotate_x(t_fdf *fdf_data, t_point *point);
+void	rotate_y(t_fdf *fdf_data, t_point *point);
+void	rotate_z(t_fdf *fdf_data, t_point *point);
+void	move(t_fdf *fdf_data, t_point *point);
 int		color_gradient(t_point current, t_point start, t_point end, t_point delta);
 void	bresenham_algorithm(mlx_image_t *img, t_line line);
 void	xiaolin_algorithm(mlx_image_t *img, t_line line);
@@ -165,12 +168,11 @@ void	create_images(t_fdf *fdf_data);
 
 // Utils
 
-int		get_height(char *str);
+int		ternary(int condition, int if_true, int if_false);
 int		get_width(char *str);
+int		get_height(char *str);
 t_point	get_node_map(t_map *map, int x, int y);
 void	set_node_map(t_map *map, t_point point, int x, int y);
-// char	*ft_read_all(int fd);
-int		ternary(int condition, int if_true, int if_false);
 void	put_pixel(mlx_image_t *img, t_point point);
 int		get_max_z_value(t_map map);
 

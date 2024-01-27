@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 19:50:15 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 01:04:05 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:33:01 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static int	auto_off(t_fdf *fdf_data)
 {
 	return (!(fdf_data->camera.auto_rotate_x
-		|| fdf_data->camera.auto_rotate_y
-		|| fdf_data->camera.auto_rotate_z));
+			|| fdf_data->camera.auto_rotate_y
+			|| fdf_data->camera.auto_rotate_z));
 }
 
 static void	rotation_keys(t_fdf *fdf_data)
@@ -37,10 +37,10 @@ static void	rotation_keys(t_fdf *fdf_data)
 			fdf_data->camera.y_angle -= 1;
 	}
 	if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_D) && auto_off(fdf_data))
-			|| fdf_data->camera.auto_rotate_z == CLOCKWISE)
+		|| fdf_data->camera.auto_rotate_z == CLOCKWISE)
 		fdf_data->camera.z_angle += 1;
 	if ((mlx_is_key_down(fdf_data->mlx, MLX_KEY_A) && auto_off(fdf_data))
-			|| fdf_data->camera.auto_rotate_z == COUNTERCLOCKWISE)
+		|| fdf_data->camera.auto_rotate_z == COUNTERCLOCKWISE)
 		fdf_data->camera.z_angle -= 1;
 }
 

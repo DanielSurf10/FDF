@@ -6,11 +6,34 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:47:30 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/24 17:37:40 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:38:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+// static void	transform_line(t_fdf *fdf_data, t_line *line)
+// {
+// 	scale(fdf_data, &(line->point_1));
+// 	scale(fdf_data, &(line->point_2));
+// 	rotate_z(fdf_data, &(line->point_1));
+// 	rotate_z(fdf_data, &(line->point_2));
+// 	rotate_x(fdf_data, &(line->point_1));
+// 	rotate_x(fdf_data, &(line->point_2));
+// 	rotate_y(fdf_data, &(line->point_1));
+// 	rotate_y(fdf_data, &(line->point_2));
+// 	move(fdf_data, &(line->point_1));
+// 	move(fdf_data, &(line->point_2));
+// }
+
+static void	transform_point(t_fdf *fdf_data, t_point *point)
+{
+	scale(fdf_data, point);
+	rotate_z(fdf_data, point);
+	rotate_x(fdf_data, point);
+	rotate_y(fdf_data, point);
+	move(fdf_data, point);
+}
 
 static void	draw_line(mlx_image_t *img, t_line line, int line_algorithm)
 {
@@ -25,7 +48,7 @@ void	render(t_fdf *fdf_data)
 	t_point	aux;
 	t_point	tmp_point_row;
 	t_line	line;
-	t_point	*tmp_points_line;
+	// t_point	*tmp_points_line;
 
 	// tmp_points_line = malloc(fdf_data->map.width * sizeof(t_point));
 	aux.y = 0;

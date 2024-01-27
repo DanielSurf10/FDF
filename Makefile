@@ -6,13 +6,13 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/27 15:54:27 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/24 16:16:12 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/01/27 20:34:11 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= fdf
-# CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-CFLAGS	:= -Wunreachable-code -Ofast -g3
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
+# CFLAGS	:= -Wunreachable-code -Ofast -g3
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= ./lib/libft
 
