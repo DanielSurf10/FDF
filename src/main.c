@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 00:10:31 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:11:16 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	init_fdf(t_fdf *fdf_data)
 			(double) fdf_data->map.height);
 	fdf_data->camera.scale_width = WIDTH / hypot((double) fdf_data->map.width,
 			(double) fdf_data->map.height);
-	fdf_data->camera.line_tracer = XIAOLIN;
+	if (fdf_data->map.width > 100 || fdf_data->map.height > 100)
+		fdf_data->camera.line_tracer = XIAOLIN;
+	else
+		fdf_data->camera.line_tracer = XIAOLIN;
 	fdf_data->camera.projection = ISOMETRIC;
 	fdf_data->camera.auto_rotate_x = STOPED;
 	fdf_data->camera.auto_rotate_y = STOPED;
