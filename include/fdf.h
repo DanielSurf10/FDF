@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 20:31:16 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:20:11 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_fdf
 	mlx_image_t	*images[NUMBER_IMAGES];
 	t_camera	camera;
 	t_map		map;
+	double		time_to_open;
 }	t_fdf;
 
 // Functions

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:25:44 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 18:28:58 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:19:23 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,16 @@ int	create_map(t_fdf *fdf_data, char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0 || read(fd, 0, 0) < 0)
 		return (FILE_ERROR);
+	ft_putendl_fd("Reading file", 1);
 	file_string = ft_read_all(fd);
+	ft_putendl_fd("Validating file", 1);
 	return_code = validate_map(file_string);		// Esse só valida, e não faz mais nada
 	if (return_code == SUCCESS)
+	{
+		ft_putendl_fd("Parsing map", 1);
 		parse_map(&(fdf_data->map), file_string);	// Esse faz o parsing, o que engloba ter que pegar o width e o height
+		ft_putendl_fd("Rendering", 1);
+	}
 
 	free(file_string);
 

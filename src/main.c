@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 21:11:16 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:29:14 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	init_fdf(t_fdf *fdf_data)
 			(double) fdf_data->map.height);
 	fdf_data->camera.scale_width = WIDTH / hypot((double) fdf_data->map.width,
 			(double) fdf_data->map.height);
-	if (fdf_data->map.width > 100 || fdf_data->map.height > 100)
-		fdf_data->camera.line_tracer = XIAOLIN;
+	if (fdf_data->map.width > 100 || fdf_data->map.height > 200)
+		fdf_data->camera.line_tracer = BRESENHAM;
 	else
 		fdf_data->camera.line_tracer = XIAOLIN;
 	fdf_data->camera.projection = ISOMETRIC;
@@ -60,8 +60,6 @@ int	main(int argv, char *argc[])
 	return_code = create_map(&fdf_data, argc[1]);
 	if (return_code == FILE_ERROR)
 		print_error(FILE_ERROR);
-
-	// Isso aqui tem que ficar pra dps da verificação e leitura do mapa
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	fdf_data.mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
 	// if (!mlx)
@@ -76,6 +74,8 @@ int	main(int argv, char *argc[])
 	// Colocar os hooks
 	mlx_key_hook(fdf_data.mlx, key_hook, &fdf_data);
 	mlx_loop_hook(fdf_data.mlx, frame, &fdf_data);
+
+	// printf("It tooks: %f seconds\n", mlx_get_time());		// Colocar o ft_printf aqui!
 
 	// mlx_loop
 	mlx_loop(fdf_data.mlx);
