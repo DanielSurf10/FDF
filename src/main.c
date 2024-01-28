@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 21:29:14 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:52:18 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(int argv, char *argc[])
 	mlx_delete_image(fdf_data.mlx, fdf_data.images[STRING]);
 	mlx_terminate(fdf_data.mlx);
 
+	ft_putendl_fd("Finishing", 1);
 
 	return (0);
 }
