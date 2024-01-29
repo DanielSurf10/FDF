@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 21:52:18 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:13:13 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int	main(int argv, char *argc[])
 
 	// fdf_data init
 	init_fdf(&fdf_data);
+	// mlx_texture_t* texture = mlx_load_png("images/icon-1png");	// Para colocar o ícone
+	// mlx_set_icon(fdf_data.mlx, texture);
+	// mlx_delete_texture(texture);
 
 	// Criar as imagens
 	create_images(&fdf_data);
