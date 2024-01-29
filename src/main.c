@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:48:23 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:03:55 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ static void	print_error(int error)
 	else if (error == FILE_ERROR)
 		ft_putendl_fd("File error. Invalid File.", 1);
 	exit(EXIT_FAILURE);
+}
+
+static void	set_icon(t_fdf *fdf_data, char *path_to_icon)
+{
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png(path_to_icon);
+	mlx_set_icon(fdf_data->mlx, texture);
+	mlx_delete_texture(texture);
 }
 
 void	init_fdf(t_fdf *fdf_data)
@@ -50,6 +59,13 @@ void	init_fdf(t_fdf *fdf_data)
 	fdf_data->camera.auto_rotate_z = STOPED;
 }
 
+static void	delete_images(t_fdf *fdf_data)
+{
+	mlx_delete_image(fdf_data->mlx, fdf_data->images[BACKGROUND]);
+	mlx_delete_image(fdf_data->mlx, fdf_data->images[RENDER]);
+	mlx_delete_image(fdf_data->mlx, fdf_data->images[STRING]);
+}
+
 int	main(int argv, char *argc[])
 {
 	int		return_code;
@@ -62,39 +78,16 @@ int	main(int argv, char *argc[])
 		print_error(FILE_ERROR);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	fdf_data.mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	// if (!mlx)
-	// 	print_error();
-
-	// fdf_data init
+	set_icon(&fdf_data, "images/icon.png");
 	init_fdf(&fdf_data);
-	// mlx_texture_t* texture = mlx_load_png("images/icon-1png");	// Para colocar o ícone
-	// mlx_set_icon(fdf_data.mlx, texture);
-	// mlx_delete_texture(texture);
-
-	// Criar as imagens
 	create_images(&fdf_data);
-
-	// Desenhar menu
 	draw_menu(&fdf_data);
-
-	// Colocar os hooks
 	mlx_key_hook(fdf_data.mlx, key_hook, &fdf_data);
 	mlx_loop_hook(fdf_data.mlx, frame, &fdf_data);
-
-	// printf("It tooks: %f seconds\n", mlx_get_time());		// Colocar o ft_printf aqui!
-
-	// mlx_loop
 	mlx_loop(fdf_data.mlx);
-
-	// Apagar tudo, destruir as imagens e fechar a janela
+	delete_images(&fdf_data);
 	free(fdf_data.map.map);
-	// delete_images(fdf_data.images);
-	mlx_delete_image(fdf_data.mlx, fdf_data.images[BACKGROUND]);
-	mlx_delete_image(fdf_data.mlx, fdf_data.images[RENDER]);
-	mlx_delete_image(fdf_data.mlx, fdf_data.images[STRING]);
 	mlx_terminate(fdf_data.mlx);
-
 	ft_putendl_fd("Finishing", 1);
-
 	return (0);
 }
