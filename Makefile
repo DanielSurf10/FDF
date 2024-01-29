@@ -6,7 +6,7 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/27 15:54:27 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/27 20:34:11 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/01/29 17:28:42 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME): libmlx libft $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 obj/%.o: src/%.c
-	@mkdir -p obj
+	@mkdir -p ${dir $@}
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 	@printf "Compiling: $(notdir $<)\n"
 
