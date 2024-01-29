@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:47:30 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:24:04 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:44:14 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ static void	draw_row(t_fdf *fdf_data, t_map map, int line_pos)
 		{
 			line.point_1 = get_node_map(&(map), x, line_pos);
 			line.point_2 = get_node_map(&(map), x + 1, line_pos);
-			draw_line(fdf_data->images[RENDER], line, fdf_data->camera.line_tracer);
+			draw_line(fdf_data->images[RENDER], line,
+				fdf_data->camera.line_tracer);
 		}
 		if ((line_pos + 1) < fdf_data->map.height)
 		{
 			line.point_1 = get_node_map(&(map), x, line_pos);
 			line.point_2 = get_node_map(&(map), x, line_pos + 1);
-			draw_line(fdf_data->images[RENDER], line, fdf_data->camera.line_tracer);
+			draw_line(fdf_data->images[RENDER], line,
+				fdf_data->camera.line_tracer);
 		}
 		x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 21:20:11 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:40:35 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int		create_map(t_fdf *fdf_data, char *file_path);
 int		validate_map(char *file_string);
 void	parse_map(t_map *map, char *file_string);
 void	init_fdf(t_fdf *fdf_data);
+void	create_images(t_fdf *fdf_data);
+void	draw_menu(t_fdf *fdf_data);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
 void	key_hook(mlx_key_data_t keydata, void* param);
@@ -164,7 +166,6 @@ void	move(t_fdf *fdf_data, t_point *point);
 int		color_gradient(t_point current, t_point start, t_point end, t_point delta);
 void	bresenham_algorithm(mlx_image_t *img, t_line line);
 void	xiaolin_algorithm(mlx_image_t *img, t_line line);
-void	create_images(t_fdf *fdf_data);
 
 
 // Utils

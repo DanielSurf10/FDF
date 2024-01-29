@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:13:13 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:48:23 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	main(int argv, char *argc[])
 
 	// Criar as imagens
 	create_images(&fdf_data);
+
+	// Desenhar menu
+	draw_menu(&fdf_data);
 
 	// Colocar os hooks
 	mlx_key_hook(fdf_data.mlx, key_hook, &fdf_data);
