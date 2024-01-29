@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:25:44 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/27 21:19:23 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/29 19:26:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,60 +46,13 @@ int	create_map(t_fdf *fdf_data, char *file_path)
 	ft_putendl_fd("Reading file", 1);
 	file_string = ft_read_all(fd);
 	ft_putendl_fd("Validating file", 1);
-	return_code = validate_map(file_string);		// Esse só valida, e não faz mais nada
+	return_code = validate_map(file_string);
 	if (return_code == SUCCESS)
 	{
 		ft_putendl_fd("Parsing map", 1);
-		parse_map(&(fdf_data->map), file_string);	// Esse faz o parsing, o que engloba ter que pegar o width e o height
+		parse_map(&(fdf_data->map), file_string);
 		ft_putendl_fd("Rendering", 1);
 	}
-
 	free(file_string);
-
-// 	t_line	line_aux;
-//
-// 	t_point aux;
-// 	aux.x = 0;
-// 	aux.y = 0;
-//
-// 	puts("");
-// 	while (aux.y < fdf_data->map.height)
-// 	{
-// 		aux.x = 0;
-// 		while (aux.x < fdf_data->map.width)
-// 		{
-// 			aux = get_node_map(&(fdf_data->map), aux.x, aux.y);
-// 			// line_aux.point_1 = get_node_map(&(fdf_data->map), aux.x, aux.y);
-// 			// line_aux.point_2 = get_node_map(&(fdf_data->map), aux.x, aux.y);
-// 			// transform_line(fdf_data, &line_aux);
-// 			printf("%2i ", aux.z);
-// 			aux.x++;
-// 		}
-// 		aux.y++;
-// 		puts("");
-// 	}
-//
-// 	aux.x = 0;
-// 	aux.y = 0;
-//
-//
-// 	aux.x = 0;
-// 	aux.y = 0;
-// 	puts("");
-// 	while (aux.y < fdf_data->map.height)
-// 	{
-// 		aux.x = 0;
-// 		while (aux.x < fdf_data->map.width)
-// 		{
-// 			line_aux.point_1 = get_node_map(&(fdf_data->map), aux.x, aux.y);
-// 			line_aux.point_2 = get_node_map(&(fdf_data->map), aux.x, aux.y);
-// 			transform_line(fdf_data, &line_aux);
-// 			printf("%2i ", line_aux.point_1.y);
-// 			aux.x++;
-// 		}
-// 		aux.y++;
-// 		puts("");
-// 	}
-
 	return (return_code);
 }
