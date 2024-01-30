@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/29 18:40:35 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:17:07 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,6 @@ t_point	get_node_map(t_map *map, int x, int y);
 void	set_node_map(t_map *map, t_point point, int x, int y);
 void	put_pixel(mlx_image_t *img, t_point point);
 int		get_max_z_value(t_map map);
+t_point	create_point(int x, int y);
 
 #endif

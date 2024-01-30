@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:35 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/25 15:09:17 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:26:23 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,13 @@ void	put_pixel(mlx_image_t *img, t_point point)
 {
 	if (point.x >= 0 && point.x < WIDTH && point.y >= 0 && point.y < HEIGHT)
 		mlx_put_pixel(img, point.x, point.y, point.color);
+}
+
+t_point	create_point(int x, int y)
+{
+	t_point	point;
+
+	point.x = x;
+	point.y = y;
+	return (point);
 }
