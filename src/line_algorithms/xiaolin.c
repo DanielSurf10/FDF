@@ -6,38 +6,11 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:07:19 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:45:52 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:38:57 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int set_brightness(int color, float brightness)
-{
-	int	brightness_rgba;
-
-	brightness_rgba = brightness * 255;
-	return ((color & 0xFFFFFF00) | brightness_rgba);
-}
-
-double	float_part(double x)
-{
-	return (x - ((int)x));
-}
-
-double	rev_float_part(double x)
-{
-	return (1.0 - float_part(x));
-}
-
-void	swap(int *a, int *b)
-{
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
 
 // #define ipart_(X) ((int)(X))
 // #define round_(X) ((int)(((double)(X))+0.5))
@@ -48,210 +21,213 @@ void	swap(int *a, int *b)
 
 void	xiaolin_algorithm(mlx_image_t *img, t_line line)
 {
-	int		x1 = line.point_1.x;
-	int		x2 = line.point_2.x;
-	int		y1 = line.point_1.y;
-	int		y2 = line.point_2.y;
-	int		color;
-	t_point	delta;
+	// int		xiaolin.x1;
+	// int		xiaolin.x2;
+	// int		xiaolin.y1;
+	// int		xiaolin.y2;
+	// int		color;
+	// t_point	xiaolin.delta;
+	// double	gradient;
+	// double	xiaolin.dx;
+	// double	xiaolin.dy;
+	// double	xiaolin.xend;
+	// double	xiaolin.yend;
+	// double	xiaolin.xgap;
+	// double	xiaolin.ygap;
+	// int		xiaolin.xpxl1;
+	// int		xiaolin.ypxl1;
+	// double	intery;
+	// double	interx;
+	// int		xiaolin.xpxl2;
+	// int		xiaolin.ypxl2;
+	// int		i;
+	// t_point	xiaolin.point_to_plot;
+	t_xiaolin	xiaolin;
 
-	double	gradient;
-	double	dx;
-	double	dy;
-	double	xend;
-	double	yend;
-	double	xgap;
-	double	ygap;
-	int		xpxl1;
-	int		ypxl1;
-	double	intery;
-	double	interx;
-	int		xpxl2;
-	int		ypxl2;
-	int		i;
+	xiaolin.x1 = line.point_1.x;
+	xiaolin.x2 = line.point_2.x;
+	xiaolin.y1 = line.point_1.y;
+	xiaolin.y2 = line.point_2.y;
+	xiaolin.delta.x = abs(line.point_2.x - line.point_1.x);
+	xiaolin.delta.y = abs(line.point_2.y - line.point_1.y);
 
-
-	delta.x = abs(line.point_2.x - line.point_1.x);
-	delta.y = abs(line.point_2.y - line.point_1.y);
-	t_point	point_to_plot;
-
-	dx = x2 - x1;
-	dy = y2 - y1;
-	if ( fabs(dx) > fabs(dy) ) {			// Quando o delta x é maior que o y
-		if ( x2 < x1 ) {
-			swap(&x1, &x2);
-			swap(&y1, &y2);
+	xiaolin.dx = xiaolin.x2 - xiaolin.x1;
+	xiaolin.dy = xiaolin.y2 - xiaolin.y1;
+	if ( fabs(xiaolin.dx) > fabs(xiaolin.dy) ) {			// Quando o xiaolin.delta x é maior que o y
+		if ( xiaolin.x2 < xiaolin.x1 ) {
+			swap(&xiaolin.x1, &xiaolin.x2);
+			swap(&xiaolin.y1, &xiaolin.y2);
 		}
-		gradient = dy / dx;
-		xend = round(x1);
-		yend = y1 + gradient * (xend - x1);
-		xgap = rev_float_part(x1 + 0.5);
-		xpxl1 = xend;
-		ypxl1 = yend;
+		xiaolin.gradient = xiaolin.dy / xiaolin.dx;
+		xiaolin.xend = round(xiaolin.x1);
+		xiaolin.yend = xiaolin.y1 + xiaolin.gradient * (xiaolin.xend - xiaolin.x1);
+		xiaolin.xgap = rev_float_part(xiaolin.x1 + 0.5);
+		xiaolin.xpxl1 = xiaolin.xend;
+		xiaolin.ypxl1 = xiaolin.yend;
 
 
-		// point_to_plot.x = xpxl1;
-		// point_to_plot.y = ypxl1;
+		// xiaolin.point_to_plot.x = xiaolin.xpxl1;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl1;
 
-		point_to_plot = create_point(xpxl1, ypxl1);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, rev_float_part(yend)*xgap);
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl1, xiaolin.ypxl1);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, rev_float_part(xiaolin.yend) * xiaolin.xgap);
 
-		put_pixel(img, point_to_plot);
-
-
-		// point_to_plot.x = xpxl1;
-		// point_to_plot.y = ypxl1 + 1;
-
-		point_to_plot = create_point(xpxl1, ypxl1 + 1);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, float_part(yend)*xgap);
-
-		put_pixel(img, point_to_plot);
+		put_pixel(img, xiaolin.point_to_plot);
 
 
-		intery = yend + gradient;
-		xend = round(x2);
-		yend = y2 + gradient * (xend - x2);
-		xgap = float_part(x2 + 0.5);
-		xpxl2 = xend;
-		ypxl2 = yend;
+		// xiaolin.point_to_plot.x = xiaolin.xpxl1;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl1 + 1;
+
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl1, xiaolin.ypxl1 + 1);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, float_part(xiaolin.yend)*xiaolin.xgap);
+
+		put_pixel(img, xiaolin.point_to_plot);
 
 
-		// point_to_plot.x = xpxl2;
-		// point_to_plot.y = ypxl2;
-
-		point_to_plot = create_point(xpxl2, ypxl2);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, rev_float_part(yend) * xgap);
-
-		put_pixel(img, point_to_plot);
+		xiaolin.intery = xiaolin.yend + xiaolin.gradient;
+		xiaolin.xend = round(xiaolin.x2);
+		xiaolin.yend = xiaolin.y2 + xiaolin.gradient * (xiaolin.xend - xiaolin.x2);
+		xiaolin.xgap = float_part(xiaolin.x2 + 0.5);
+		xiaolin.xpxl2 = xiaolin.xend;
+		xiaolin.ypxl2 = xiaolin.yend;
 
 
-		// point_to_plot.x = xpxl2;
-		// point_to_plot.y = ypxl2 + 1;
+		// xiaolin.point_to_plot.x = xiaolin.xpxl2;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl2;
 
-		point_to_plot = create_point(xpxl2, ypxl2 + 1);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, float_part(yend) * xgap);
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl2, xiaolin.ypxl2);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, rev_float_part(xiaolin.yend) * xiaolin.xgap);
 
-		put_pixel(img, point_to_plot);
+		put_pixel(img, xiaolin.point_to_plot);
 
 
-		i = xpxl1 + 1;
-		while (i < xpxl2)
+		// xiaolin.point_to_plot.x = xiaolin.xpxl2;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl2 + 1;
+
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl2, xiaolin.ypxl2 + 1);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, float_part(xiaolin.yend) * xiaolin.xgap);
+
+		put_pixel(img, xiaolin.point_to_plot);
+
+
+		xiaolin.i = xiaolin.xpxl1 + 1;
+		while (xiaolin.i < xiaolin.xpxl2)
 		{
 
-			// point_to_plot.x = i;
-			// point_to_plot.y = intery;
+			// xiaolin.point_to_plot.x = xiaolin.i;
+			// xiaolin.point_to_plot.y = xiaolin.intery;
 
-			point_to_plot = create_point(i, intery);
-			color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-			point_to_plot.color = set_brightness(color, rev_float_part(intery));
+			xiaolin.point_to_plot = create_point(xiaolin.i, xiaolin.intery);
+			xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+			xiaolin.point_to_plot.color = set_brightness(xiaolin.color, rev_float_part(xiaolin.intery));
 
-			put_pixel(img, point_to_plot);
-
-
-			// point_to_plot.x = i;
-			// point_to_plot.y = intery + 1;
-
-			point_to_plot = create_point(i, intery + 1);
-			color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-			point_to_plot.color = set_brightness(color, float_part(intery));
-
-			put_pixel(img, point_to_plot);
+			put_pixel(img, xiaolin.point_to_plot);
 
 
-			intery += gradient;
-			i++;
+			// xiaolin.point_to_plot.x = i;
+			// xiaolin.point_to_plot.y = xiaolin.intery + 1;
+
+			xiaolin.point_to_plot = create_point(xiaolin.i, xiaolin.intery + 1);
+			xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+			xiaolin.point_to_plot.color = set_brightness(xiaolin.color, float_part(xiaolin.intery));
+
+			put_pixel(img, xiaolin.point_to_plot);
+
+
+			xiaolin.intery += xiaolin.gradient;
+			xiaolin.i++;
 		}
-	} else {								// Quando o delta y é maior que o x
-		if ( y2 < y1 ) {
-			swap(&x1, &x2);
-			swap(&y1, &y2);
+	} else {								// Quando o xiaolin.delta y é maior que o x
+		if ( xiaolin.y2 < xiaolin.y1 ) {
+			swap(&xiaolin.x1, &xiaolin.x2);
+			swap(&xiaolin.y1, &xiaolin.y2);
 		}
-		gradient = dx / dy;
-		yend = round(y1);
-		xend = x1 + gradient * (yend - y1);
-		ygap = rev_float_part(y1 + 0.5);
-		ypxl1 = yend;
-		xpxl1 = xend;
+		xiaolin.gradient = xiaolin.dx / xiaolin.dy;
+		xiaolin.yend = round(xiaolin.y1);
+		xiaolin.xend = xiaolin.x1 + xiaolin.gradient * (xiaolin.yend - xiaolin.y1);
+		xiaolin.ygap = rev_float_part(xiaolin.y1 + 0.5);
+		xiaolin.ypxl1 = xiaolin.yend;
+		xiaolin.xpxl1 = xiaolin.xend;
 
 
-		// point_to_plot.x = xpxl1;
-		// point_to_plot.y = ypxl1;
+		// xiaolin.point_to_plot.x = xiaolin.xpxl1;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl1;
 
-		point_to_plot = create_point(xpxl1, ypxl1);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, rev_float_part(xend) * ygap);
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl1, xiaolin.ypxl1);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, rev_float_part(xiaolin.xend) * xiaolin.ygap);
 
-		put_pixel(img, point_to_plot);
-
-
-		// point_to_plot.x = xpxl1 + 1;
-		// point_to_plot.y = ypxl1;
-
-		point_to_plot = create_point(xpxl1 + 1, ypxl1);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, float_part(xend) * ygap);
-
-		put_pixel(img, point_to_plot);
+		put_pixel(img, xiaolin.point_to_plot);
 
 
-		interx = xend + gradient;
-		yend = round(y2);
-		xend = x2 + gradient * (yend - y2);
-		ygap = float_part(y2 + 0.5);
-		ypxl2 = yend;
-		xpxl2 = xend;
+		// xiaolin.point_to_plot.x = xiaolin.xpxl1 + 1;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl1;
+
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl1 + 1, xiaolin.ypxl1);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, float_part(xiaolin.xend) * xiaolin.ygap);
+
+		put_pixel(img, xiaolin.point_to_plot);
 
 
-		// point_to_plot.x = xpxl2;
-		// point_to_plot.y = ypxl2;
-
-		point_to_plot = create_point(xpxl2, ypxl2);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, rev_float_part(xend) * ygap);
-
-		put_pixel(img, point_to_plot);
+		xiaolin.interx = xiaolin.xend + xiaolin.gradient;
+		xiaolin.yend = round(xiaolin.y2);
+		xiaolin.xend = xiaolin.x2 + xiaolin.gradient * (xiaolin.yend - xiaolin.y2);
+		xiaolin.ygap = float_part(xiaolin.y2 + 0.5);
+		xiaolin.ypxl2 = xiaolin.yend;
+		xiaolin.xpxl2 = xiaolin.xend;
 
 
-		// point_to_plot.x = xpxl2 + 1;
-		// point_to_plot.y = ypxl2;
+		// xiaolin.point_to_plot.x = xiaolin.xpxl2;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl2;
 
-		point_to_plot = create_point(xpxl2 + 1, ypxl2);
-		color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-		point_to_plot.color = set_brightness(color, float_part(xend) * ygap);
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl2, xiaolin.ypxl2);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, rev_float_part(xiaolin.xend) * xiaolin.ygap);
 
-		put_pixel(img, point_to_plot);
+		put_pixel(img, xiaolin.point_to_plot);
 
 
-		i = ypxl1 + 1;
-		while (i < ypxl2)
+		// xiaolin.point_to_plot.x = xiaolin.xpxl2 + 1;
+		// xiaolin.point_to_plot.y = xiaolin.ypxl2;
+
+		xiaolin.point_to_plot = create_point(xiaolin.xpxl2 + 1, xiaolin.ypxl2);
+		xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+		xiaolin.point_to_plot.color = set_brightness(xiaolin.color, float_part(xiaolin.xend) * xiaolin.ygap);
+
+		put_pixel(img, xiaolin.point_to_plot);
+
+
+		xiaolin.i = xiaolin.ypxl1 + 1;
+		while (xiaolin.i < xiaolin.ypxl2)
 		{
 
-			// point_to_plot.x = interx;
-			// point_to_plot.y = i;
+			// xiaolin.point_to_plot.x = xiaolin.interx;
+			// xiaolin.point_to_plot.y = xiaolin.i;
 
-			point_to_plot = create_point(interx, i);
-			color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-			point_to_plot.color = set_brightness(color, rev_float_part(interx));
+			xiaolin.point_to_plot = create_point(xiaolin.interx, xiaolin.i);
+			xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+			xiaolin.point_to_plot.color = set_brightness(xiaolin.color, rev_float_part(xiaolin.interx));
 
-			put_pixel(img, point_to_plot);
-
-
-			point_to_plot.x = interx + 1;
-			point_to_plot.y = i;
-
-			point_to_plot = create_point(interx + 1, i);
-			color = color_gradient(point_to_plot, line.point_1, line.point_2, delta);
-			point_to_plot.color = set_brightness(color, float_part(interx));
-
-			put_pixel(img, point_to_plot);
+			put_pixel(img, xiaolin.point_to_plot);
 
 
-			interx += gradient;
-			i++;
+			xiaolin.point_to_plot.x = xiaolin.interx + 1;
+			xiaolin.point_to_plot.y = xiaolin.i;
+
+			xiaolin.point_to_plot = create_point(xiaolin.interx + 1, xiaolin.i);
+			xiaolin.color = color_gradient(xiaolin.point_to_plot, line.point_1, line.point_2, xiaolin.delta);
+			xiaolin.point_to_plot.color = set_brightness(xiaolin.color, float_part(xiaolin.interx));
+
+			put_pixel(img, xiaolin.point_to_plot);
+
+
+			xiaolin.interx += xiaolin.gradient;
+			xiaolin.i++;
 		}
 	}
 }

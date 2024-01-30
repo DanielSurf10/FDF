@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:17:07 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:40:52 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,31 @@ typedef struct s_bresenham
 	t_line	original_line;
 }	t_bresenham;
 
+typedef struct s_xioalin
+{
+	int		i;
+	int		x1;
+	int		x2;
+	int		y1;
+	int		y2;
+	int		color;
+	int		xpxl1;
+	int		ypxl1;
+	int		xpxl2;
+	int		ypxl2;
+	double	gradient;
+	double	dx;
+	double	dy;
+	double	xend;
+	double	yend;
+	double	xgap;
+	double	ygap;
+	double	intery;
+	double	interx;
+	t_point	delta;
+	t_point	point_to_plot;
+}	t_xiaolin;
+
 typedef struct s_camera
 {
 	int		x_offset;
@@ -178,5 +203,14 @@ void	set_node_map(t_map *map, t_point point, int x, int y);
 void	put_pixel(mlx_image_t *img, t_point point);
 int		get_max_z_value(t_map map);
 t_point	create_point(int x, int y);
+
+
+// Utils Xiaolin
+int		set_brightness(int color, float brightness);
+double	float_part(double x);
+double	float_part(double x);
+double	rev_float_part(double x);
+void	swap(int *a, int *b);
+
 
 #endif

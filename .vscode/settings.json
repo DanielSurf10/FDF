@@ -5,7 +5,8 @@
 		"cstdlib": "c",
 		"sstream": "c",
 		"stdio.h": "c",
-		"fdf.h": "c"
+		"fdf.h": "c",
+		"fdf": "c"
 	},
 	"C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }
