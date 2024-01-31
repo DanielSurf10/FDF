@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/30 19:40:52 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:37:31 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_xioalin
 	double	interx;
 	t_point	delta;
 	t_point	point_to_plot;
+	t_line	original_line;
 }	t_xiaolin;
 
 typedef struct s_camera
@@ -190,8 +191,9 @@ void	rotate_z(t_fdf *fdf_data, t_point *point);
 void	move(t_fdf *fdf_data, t_point *point);
 int		color_gradient(t_point current, t_point start, t_point end, t_point delta);
 void	bresenham_algorithm(mlx_image_t *img, t_line line);
+void	inicializate_x_greater(mlx_image_t *img, t_xiaolin *xiaolin);
+void	inicializate_x_lesser(mlx_image_t *img, t_xiaolin *xiaolin);
 void	xiaolin_algorithm(mlx_image_t *img, t_line line);
-
 
 // Utils
 
