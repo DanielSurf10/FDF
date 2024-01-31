@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_atoi_hex.c                                    :+:      :+:    :+:   */
+/*   xiaolin_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 17:07:46 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/17 17:13:09 by danbarbo         ###   ########.fr       */
+/*   Created: 2024/01/30 18:48:00 by danbarbo          #+#    #+#             */
+/*   Updated: 2024/01/31 16:57:46 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "fdf_bonus.h"
 
-int main()
+int	set_brightness(int color, float brightness)
 {
-	int a = ft_atoi_hex("0xA");
-	printf("%d\n", a);
+	int	brightness_rgba;
 
-	return (0);
+	brightness_rgba = brightness * 255;
+	return ((color & 0xFFFFFF00) | brightness_rgba);
+}
+
+double	float_part(double x)
+{
+	return (x - ((int)x));
+}
+
+double	rev_float_part(double x)
+{
+	return (1.0 - float_part(x));
+}
+
+void	swap(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
