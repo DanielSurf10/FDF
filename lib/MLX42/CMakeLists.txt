@@ -5,7 +5,7 @@
 
 # CMake specifications
 # -----------------------------------------------------------------------------
-cmake_minimum_required (VERSION 3.18.0)
+cmake_minimum_required (VERSION 3.16.3)
 project(mlx42 VERSION 2.3.3)
 message(STATUS "MLX42 @ ${CMAKE_PROJECT_VERSION}")
 
@@ -41,7 +41,7 @@ if(UNIX)
 		-Wall
 		-Werror
 		-Wunreachable-code
-		
+
 		# Some low priority warnings that are annoying.
 		-Wno-char-subscripts
 		-Wno-sign-compare
@@ -147,7 +147,7 @@ endif()
 
 # Testing
 # -----------------------------------------------------------------------------
-# Only build tests if we are the main project or explicitly told to, make sure 
+# Only build tests if we are the main project or explicitly told to, make sure
 # tests are not built when mlx42 is included as a subproject, use MLX42_BUILD_TESTS to overwrite this
 # use cmake -DBUILD_TESTS=ON/-DMLX42_BUILD_TESTS=ON to build tests
 

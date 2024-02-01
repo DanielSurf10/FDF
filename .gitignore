@@ -1,3 +1,4 @@
 *.o
 *.a
 fdf
+lib/MLX42/build/*
