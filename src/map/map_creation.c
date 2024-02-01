@@ -6,11 +6,23 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 15:25:44 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/29 19:26:03 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:44:48 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int	check_file_extension(char *file_path)
+{
+	int	length;
+
+	length = ft_strlen(file_path);
+	if (length < 4)
+		return (1);
+	if (ft_strncmp(file_path + length - 4, ".fdf", 4) != 0)
+		return (1);
+	return (0);
+}
 
 static char	*ft_read_all(int fd)
 {
@@ -40,6 +52,8 @@ int	create_map(t_fdf *fdf_data, char *file_path)
 	int		return_code;
 	char	*file_string;
 
+	if (check_file_extension(file_path) != 0)
+		return (FILE_ERROR);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0 || read(fd, 0, 0) < 0)
 		return (FILE_ERROR);
