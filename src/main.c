@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:00:29 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:19:00 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/02/04 20:03:41 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_fdf(t_fdf *fdf_data)
 	fdf_data->camera.x_angle = 60;
 	fdf_data->camera.y_angle = 0;
 	fdf_data->camera.z_angle = 45;
-	fdf_data->camera.x_offset = WIDTH / 2 + (WIDTH / 2) / 5;
+	fdf_data->camera.x_offset = WIDTH / 2;
 	fdf_data->camera.y_offset = HEIGHT / 2;
 	fdf_data->map.max_z = get_max_z_value(fdf_data->map);
 	if (fdf_data->map.max_z < 100 && fdf_data->map.max_z != 0)
@@ -63,7 +63,6 @@ static void	delete_images(t_fdf *fdf_data)
 {
 	mlx_delete_image(fdf_data->mlx, fdf_data->images[BACKGROUND]);
 	mlx_delete_image(fdf_data->mlx, fdf_data->images[RENDER]);
-	mlx_delete_image(fdf_data->mlx, fdf_data->images[STRING]);
 }
 
 int	main(int argv, char *argc[])
@@ -81,7 +80,6 @@ int	main(int argv, char *argc[])
 	set_icon(&fdf_data, "src/icon.png");
 	init_fdf(&fdf_data);
 	create_images(&fdf_data);
-	draw_menu(&fdf_data);
 	mlx_key_hook(fdf_data.mlx, key_hook, &fdf_data);
 	mlx_loop_hook(fdf_data.mlx, frame, &fdf_data);
 	mlx_loop(fdf_data.mlx);

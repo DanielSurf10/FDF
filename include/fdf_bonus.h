@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:26:04 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/02/04 20:02:03 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ enum e_line_tracer
 enum e_projection
 {
 	ISOMETRIC = 0,
-	TOP_DOWN,
-	THREE_VIEWS
+	TOP_DOWN
 };
 
 enum e_rotation_sense

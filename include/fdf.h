@@ -6,7 +6,7 @@
 /*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 19:06:07 by danbarbo          #+#    #+#             */
-/*   Updated: 2024/01/31 17:25:50 by danbarbo         ###   ########.fr       */
+/*   Updated: 2024/02/04 20:14:15 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@
 # define HEIGHT 720
 
 # define PI 3.14159
-# define NUMBER_IMAGES 3
+# define NUMBER_IMAGES 2
 # define BUFFER_SIZE 4096
 # define BACKGROUND_COLOR 0x89ABE3DB
-# define BACKGROUND_STRING_COLOR 0xEA738DA0
 
 enum e_errors
 {
@@ -40,8 +39,7 @@ enum e_errors
 enum e_images
 {
 	BACKGROUND = 0,
-	RENDER,
-	STRING
+	RENDER
 };
 
 enum e_line_tracer
@@ -53,8 +51,7 @@ enum e_line_tracer
 enum e_projection
 {
 	ISOMETRIC = 0,
-	TOP_DOWN,
-	THREE_VIEWS
+	TOP_DOWN
 };
 
 enum e_rotation_sense
@@ -160,11 +157,9 @@ int		validate_map(char *file_string);
 void	parse_map(t_map *map, char *file_string);
 void	init_fdf(t_fdf *fdf_data);
 void	create_images(t_fdf *fdf_data);
-void	draw_menu(t_fdf *fdf_data);
 void	frame(void *param);
 void	render(t_fdf *fdf_data);
 void	key_hook(mlx_key_data_t keydata, void *param);
-void	manag_keys(t_fdf *fdf_data);
 void	scale(t_fdf *fdf_data, t_point *point);
 void	rotate_x(t_fdf *fdf_data, t_point *point);
 void	rotate_y(t_fdf *fdf_data, t_point *point);

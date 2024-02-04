@@ -6,7 +6,7 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/27 15:54:27 by danbarbo          #+#    #+#              #
-#    Updated: 2024/01/31 17:33:32 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/02/04 20:01:04 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ SRCS	:= src/render/frame.c \
 				src/render/transformation.c \
 				src/render/images.c \
 				src/render/render.c \
-				src/render/menu.c \
-				src/key_actions/key_actions_loop.c \
 				src/key_actions/key_actions_hook.c \
 				src/map/map_creation.c \
 				src/map/map_parsing.c \
@@ -67,11 +65,13 @@ OBJS_BONUS	:= ${SRCS_BONUS:src_bonus/%.c=obj/%.o}
 all: ${NAME}
 ${NAME}: libmlx libft ${OBJS}
 	@${CC} ${OBJS} ${LIBS} ${HEADERS} -o ${NAME}
+	@printf "Finished.\n"
 
 bonus: ${NAME_B}
 
 ${NAME_B}: libmlx libft ${OBJS_BONUS}
 	@${CC} ${OBJS_BONUS} ${LIBS} ${HEADERS} -o ${NAME_B}
+	@printf "Finished.\n"
 
 obj/%.o: src/%.c
 	@mkdir -p ${dir $@}
