@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:04:58 by lsouza-r          #+#    #+#             */
-/*   Updated: 2024/06/09 21:43:51 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:58:37 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static void	del_and_create_img(t_fdf_ctl *mesh_data);
 
 static void	ft_error_codam(void)
 {
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	char	*error;
+
+	error = (char *) mlx_strerror(mlx_errno);
+	ft_putendl_fd(error, 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -57,12 +60,23 @@ static void	frame_hook(void *param)
 	del_and_create_img(mesh_data);
 }
 
+static void	terminate(t_fdf_ctl *mesh_data)
+{
+	mlx_delete_image(mesh_data->mlx, mesh_data->img);
+	mlx_terminate(mesh_data->mlx);
+	clear_mesh(&mesh_data->mesh);
+}
+
 int32_t	main(int argc, char **argv)
 {
 	t_mesh		*mesh;
 	t_fdf_ctl	mesh_data;
 
 	mesh = NULL;
+	if (argc > 2)
+		ft_error("Error: Too many arguments :(");
+	else if (argc < 2)
+		ft_error("Error: You forgot the map :(");
 	init_fdf_data(&mesh_data);
 	gnl_map(argv[1], &mesh_data, &mesh);
 	mesh_data.mesh = mesh;
@@ -74,15 +88,9 @@ int32_t	main(int argc, char **argv)
 	if (!mesh_data.img || \
 		(mlx_image_to_window(mesh_data.mlx, mesh_data.img, 0, 0) < 0))
 		ft_error_codam();
-	if (argc > 2)
-		ft_error("Error: Too many arguments :(");
-	else if (argc < 2)
-		ft_error("Error: You forgot the map :(");
 	ft_build_wireframe(mesh_data.mesh, &mesh_data);
 	mlx_loop_hook(mesh_data.mlx, frame_hook, &mesh_data);
 	mlx_loop(mesh_data.mlx);
-	mlx_delete_image(mesh_data.mlx, mesh_data.img);
-	mlx_terminate(mesh_data.mlx);
-	free (mesh);
+	terminate(&mesh_data);
 	return (EXIT_SUCCESS);
 }

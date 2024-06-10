@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 20:23:37 by lsouza-r          #+#    #+#             */
-/*   Updated: 2024/06/09 20:24:22 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:44:33 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,29 @@ t_mesh	*ft_new_point(int x, int y, char *z)
 	new_point->color_rgba = add_color(new_point->z);
 	new_point->next = NULL;
 	return (new_point);
+}
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+void	clear_mesh(t_mesh **mesh)
+{
+	t_mesh	*tmp;
+
+	while (*mesh)
+	{
+		tmp = (*mesh)->next;
+		free(*mesh);
+		*mesh = tmp;
+	}
 }

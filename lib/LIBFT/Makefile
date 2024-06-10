@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+         #
+#    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/26 16:56:12 by lsouza-r          #+#    #+#              #
-#    Updated: 2024/06/10 16:55:52 by lsouza-r         ###   ########.fr        #
+#    Updated: 2024/06/10 19:06:05 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= libft.a
 
 # Compilation and Flags
 CC		= cc
-FLAGS	= -Wall -Wextra -Werror -c
+FLAGS	= -Wall -Wextra -Werror -c -g3
 
 # Source files
 SRC		= ft_atoi.c \
@@ -72,8 +72,9 @@ ${NAME}: ${OBJ}
 bonus: ${OBJ_BONUS}
 # Generate objects rule
 %.o: %.c
-	$(CC) $(FLAGS) -I ./include $< -o $@ 
-	ar rcs ${NAME} $@
+	@$(CC) $(FLAGS) -I ./include $< -o $@
+	@ar rcs ${NAME} $@
+	@printf "Compiling $<\n"
 
 # Delete files rules
 clean:

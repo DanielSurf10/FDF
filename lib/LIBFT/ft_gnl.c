@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_gnl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 19:52:47 by lsouza-r          #+#    #+#             */
-/*   Updated: 2024/06/10 16:55:11 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:07:50 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*get_next_line(int fd)
 	line_to_return = ft_build_line_to_return(full_line);
 	line_backup = get_line_after_bslash_n(full_line);
 	free(full_line);
-	full_line = NULL;
 	if (*line_to_return == '\0' && *line_backup == '\0')
 	{
 		free(line_to_return);
@@ -45,9 +44,11 @@ char	*get_next_line(int fd)
 char	*ft_read(char *joined, int fd)
 {
 	char	*buffer;
+	char	*old_joined;
 	int		read_size;
 
 	read_size = 1;
+	old_joined = joined;
 	buffer = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
 	while (read_size > 0 && !ft_strchr(joined, '\n'))
 	{
@@ -55,6 +56,8 @@ char	*ft_read(char *joined, int fd)
 		buffer[read_size] = '\0';
 		joined = ft_strjoin(joined, buffer);
 	}
+	if (old_joined != joined)
+		free(old_joined);
 	free(buffer);
 	return (joined);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:36:37 by lsouza-r          #+#    #+#             */
-/*   Updated: 2024/06/09 21:21:08 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:44:58 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,6 @@ void		centralize(t_mesh *node_1, t_mesh *node_2, t_fdf_ctl *mesh_data);
 void		init_fdf_data(t_fdf_ctl *mesh_data);
 uint32_t	add_color(int z);
 void		draw_vertical_line(t_mesh *current_node, t_fdf_ctl *mesh_data);
+void		free_split(char **split);
+void		clear_mesh(t_mesh **mesh);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 13:57:56 by lsouza-r          #+#    #+#             */
-/*   Updated: 2023/12/22 20:28:47 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:06:35 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t	ft_substr_len(char const *s, char c)
 
 static char	*put_str_in_array(const char *s, size_t len)
 {
-	char	*sub_str;	
+	char	*sub_str;
 	size_t	i;
 
 	sub_str = (char *) malloc((len + 1) * sizeof(char));

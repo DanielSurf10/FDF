@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:50:02 by lsouza-r          #+#    #+#             */
-/*   Updated: 2024/06/09 20:48:36 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:54:43 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ void	ft_error(char *error)
 		}
 		write(2, "\n", 1);
 	}
+	if (read(3, NULL, 0) == 0)
+		close(3);
+	get_next_line(-1);
 	exit(EXIT_FAILURE);
 }

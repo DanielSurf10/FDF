@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsouza-r <lsouza-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:37:23 by lsouza-r          #+#    #+#             */
-/*   Updated: 2024/06/09 20:24:29 by lsouza-r         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:05:45 by danbarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	build_mesh(char *line, t_fdf_ctl **fdf_data, int y, t_mesh **mesh);
+static void	free_all(char **splitted, char *line, t_mesh **mesh)
+{
+	free_split(splitted);
+	free(line);
+	clear_mesh(mesh);
+}
 
 static void	build_mesh(char *line, t_fdf_ctl **fdf_data, int y, t_mesh **mesh)
 {
@@ -33,9 +38,13 @@ static void	build_mesh(char *line, t_fdf_ctl **fdf_data, int y, t_mesh **mesh)
 	if (y == 0)
 		(*fdf_data)->width = x;
 	else if ((*fdf_data)->width != x)
+	{
+		free_all(splitted, line, mesh);
 		ft_error("Error: All lines must have the same number of points. ");
+	}
 	else
 		(*fdf_data)->width = x;
+	free_split(splitted);
 }
 
 void	fdf_file(const char *file_name)
@@ -61,13 +70,15 @@ void	gnl_map(const char *file_path, t_fdf_ctl *mesh_data, t_mesh **mesh)
 	y = 0;
 	while (line)
 	{
-		build_mesh(line, &mesh_data, y, mesh);
+		build_mesh(line, &mesh_data, y++, mesh);
 		free (line);
 		line = get_next_line(fd);
-		y++;
 	}
 	if (y < 2)
+	{
+		clear_mesh(mesh);
 		ft_error("Error: The map needs at least two lines.");
+	}
 	else
 		mesh_data->height = y;
 	close(fd);
