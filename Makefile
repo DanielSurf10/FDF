@@ -6,7 +6,7 @@
 #    By: danbarbo <danbarbo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/05 12:04:19 by lsouza-r          #+#    #+#              #
-#    Updated: 2024/06/10 18:22:58 by danbarbo         ###   ########.fr        #
+#    Updated: 2024/06/10 19:23:00 by danbarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,16 @@ HEADERS	:= -I ./include -I \
 LIBS	:= $(LIBMLX)/build/libmlx42.a \
 						${LIBFT}/libft.a \
 							-ldl -lglfw -pthread -lm
-SRCS	:= $(shell find src -iname "*.c")
+SRCS	:= src/ft_errors.c \
+			src/ft_utils.c \
+			src/ft_transformations.c \
+			src/ft_rotate.c \
+			src/ft_scale.c \
+			src/init.c \
+			src/ft_map.c \
+			src/colors.c \
+			src/ft_raster.c \
+			src/main.c
 OBJS	:= ${SRCS:src/%.c=obj/%.o}
 
 all: libmlx libft $(NAME)
@@ -41,7 +50,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf obj
-#	@rm -rf $(LIBMLX)/build
+	@rm -rf $(LIBMLX)/build
 	@make clean -C ${LIBFT}
 
 fclean: clean
